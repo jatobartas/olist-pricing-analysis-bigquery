@@ -1,3 +1,8 @@
+## Data check: distinct keys
+- Primary keys are unique in orders (99,441), order_items (112,650; key: order_id + order_item_id), products (32,951), sellers (3,095), order_payments (103,886; key: order_id + payment_sequential) and category_translation (71), so these tables can be joined safely.
+- customers has 99,441 rows but only 96,096 distinct customer_unique_id values: customer_id is assigned per order, so 3,345 rows come from repeat buyers.
+- order_reviews has 99,224 rows but only 98,673 distinct orders (551 more rows than orders): some orders have more than one review, so reviews are aggregated to one row per order before joining.
+- geolocation has 1,000,163 rows for 19,015 zip code prefixes, so it is not joined directly to other tables.
 ## Data check: missing values
 - table orders, column - order_approved_at: 160 missing values (probably canceled or not accepted)
 - table orders, column - order_delivered_customer_date: 2965 missing values (not delivered or canceled during the delivery)
