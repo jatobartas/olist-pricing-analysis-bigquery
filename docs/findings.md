@@ -7,7 +7,6 @@
 - table orders, column - order_approved_at: 160 missing values (probably canceled or not accepted)
 - table orders, column - order_delivered_customer_date: 2965 missing values (not delivered or canceled during the delivery)
 - table products, column - product_category_name: 610 missing values (products without category, unknown)
-
 ## Data check: order statuses and date range
 - 97.02% of orders (96,478 of 99,441) have the status "delivered". The remaining statuses are shipped (1.11%), canceled (0.63%), unavailable (0.61%), invoiced (0.32%), processing (0.30%), created (0.01%) and approved (<0.01%).
 - The analysis uses delivered orders only, because they represent completed sales with final prices, freight costs and review scores; the excluded 3% would add incomplete or cancelled transactions.
@@ -22,3 +21,8 @@
 - Customer and seller states and cities have no missing values. 8 items have no delivery_days (delivered orders without a delivery date), 827 have no review score (orders without reviews) and 1,537 have the category "unknown" (products without category).
 - Reviews are averaged per order before joining and payments are not joined, because both can have several rows per order and would duplicate item values.
 - Missing values are kept as NULL and are not imputed. Averages ignore them: delivery time uses items with a delivery date (99.993% of items), review scores use rated items only (99.25%). Items with category "unknown" (1.39%) stay in totals and are reported separately in category breakdowns.
+- ## KPIs: overall
+- The delivered orders contain 110,197 items in 96,478 orders (about 1.14 items per order), sold by 2,970 sellers across 32,216 products to 93,358 unique customers.
+- Revenue (item prices, excluding freight) is 13.22 million BRL; freight adds 2.20 million BRL.
+- The average order value is 137.04 BRL and the average item price is 119.98 BRL, while the median item price is only 74.90 BRL; the 99th percentile is 888.90 BRL, confirming a right-skewed price distribution.
+- Orders are delivered in 12.0 days on average and the average review score is 4.08 out of 5.
