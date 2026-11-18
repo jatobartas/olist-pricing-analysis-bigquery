@@ -21,8 +21,13 @@
 - Customer and seller states and cities have no missing values. 8 items have no delivery_days (delivered orders without a delivery date), 827 have no review score (orders without reviews) and 1,537 have the category "unknown" (products without category).
 - Reviews are averaged per order before joining and payments are not joined, because both can have several rows per order and would duplicate item values.
 - Missing values are kept as NULL and are not imputed. Averages ignore them: delivery time uses items with a delivery date (99.993% of items), review scores use rated items only (99.25%). Items with category "unknown" (1.39%) stay in totals and are reported separately in category breakdowns.
-- ## KPIs: overall
-- The delivered orders contain 110,197 items in 96,478 orders (about 1.14 items per order), sold by 2,970 sellers across 32,216 products to 93,358 unique customers.
-- Revenue (item prices, excluding freight) is 13.22 million BRL; freight adds 2.20 million BRL.
-- The average order value is 137.04 BRL and the average item price is 119.98 BRL, while the median item price is only 74.90 BRL; the 99th percentile is 888.90 BRL, confirming a right-skewed price distribution.
-- Orders are delivered in 12.0 days on average and the average review score is 4.08 out of 5.
+## KPIs: overall
+- Delivered orders: 110,197 items in 96,478 orders, from 93,358 unique customers, 2,970 sellers and 32,216 products.
+- Revenue (item prices, excluding freight) is 13,221,498.11 BRL; total freight is 2,198,275.64 BRL.
+- The average order value is 137.04 BRL, the average item price is 119.98 BRL and the median item price is 74.90 BRL. The 99th percentile of the item price is 888.90 BRL.
+- The average delivery time is 12.0 days and the average review score is 4.08.
+## KPIs: monthly trend
+- The first months of the data are too sparse for trend analysis: 3 items in Sep 2016, 313 in Oct 2016, no sales in Nov 2016 and 1 item in Dec 2016. Trends will be therefore shown from Jan 2017.
+- Excluding the first 3 months the lowest value of items sold was in Jan 2017 which was equal to 913. The peak was in Nov 2017 which could be driven by Black Friday.
+- The highest revenue also occurred in Nov 2017 (987765.37 BRL)
+- The average order value stayed between 124 and 149 BRL without a clear trend, so growth came from the number of orders rather than larger baskets.
