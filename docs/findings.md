@@ -17,3 +17,8 @@
 - Freight values range from 0 to 409.68 (mean 19.99); 383 items (0.34%) have free shipping.
 - The large gap between maximum and mean price suggests a right-skewed price distribution, so medians are used instead of means for price comparisons. Median price: 74.99 so 50% of the prices are under 74.99 and 50% are over. The value for the 99th percentil is 890.0, so 99% of the prices are below that value.
 - 8 orders with status "delivered" have no delivery date; they are excluded from delivery-time metrics only. No order was delivered before it was purchased.
+## Base view: big_table
+- big_table has one row per delivered order item (110,197 rows). The row count matches the delivered order items in the source tables and every item key (order_id + order_item_id) is unique, so no join duplicated or lost rows.
+- Customer and seller states and cities have no missing values. 8 items have no delivery_days (delivered orders without a delivery date), 827 have no review score (orders without reviews) and 1,537 have the category "unknown" (products without category).
+- Reviews are averaged per order before joining and payments are not joined, because both can have several rows per order and would duplicate item values.
+- Missing values are kept as NULL and are not imputed. Averages ignore them: delivery time uses items with a delivery date (99.993% of items), review scores use rated items only (99.25%). Items with category "unknown" (1.39%) stay in totals and are reported separately in category breakdowns.
