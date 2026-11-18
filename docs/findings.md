@@ -31,3 +31,8 @@
 - Excluding the first 3 months the lowest value of items sold was in Jan 2017 which was equal to 913. The peak was in Nov 2017 which could be driven by Black Friday.
 - The highest revenue also occurred in Nov 2017 (987765.37 BRL)
 - The average order value stayed between 124 and 149 BRL without a clear trend, so growth came from the number of orders rather than larger baskets.
+## KPIs: top 10 categories by revenue
+- The highest selling categories are 1. health_beauty (1233131.72 BRL), 2. watches_gifts (1166176.98 BRL), 3. bed_bath_table (1023434.76 BRL)
+- Bed_bath_table sold the most items (10,953). Watches are second in revenue with only 5859 items sold.
+- From the top 10 category in revenue, the furniture_decor has the lowest average prices (87.25 BRL) and housewares (90.60 BRL)
+- In every top 10 category the average price is higher than the median price (e.g. health_beauty: 130.28 vs 79.90 BRL; watches_gifts: 199.04 vs 128.90 BRL). This means that the distribution is right-skewed and a smaller number of expensive items pulls the average up, so the median is gonna describe a typical price better.
