@@ -69,3 +69,12 @@
 - The average score falls with each longer delivery group: 4.2 for 8 to 14 days (41,716 items) and 4.02 for 15 to 21 days (17,479 items).
 - Items delivered after more than 21 days have an average review score of 2.97 (12,274 items).
 - Items without a delivery date are excluded from this analysis.
+## Top 10 sellers by revenue
+- The top seller generated 226,987.93 BRL in revenue, the second 217,940.44 BRL, and the 10th 131,836.71 BRL.
+- Average review scores among the top 10 sellers range from 3.35 to 4.37.
+- 7 of the 10 sellers have an average review score above 4.0.
+- The 5th seller by revenue (186,570.05 BRL) has the lowest average review score in this group (3.35).
+- The 4th seller (190,917.14 BRL) has the highest (4.37).
+## Same-state vs cross-state shipping
+- Items shipped between different states take 14.58 days on average to be delivered, compared with 7.46 days within the same state.
+- The average freight value is 24.0 BRL for different-state shipping and 13.0 BRL for same-state shipping.
