@@ -36,3 +36,7 @@
 - Bed_bath_table sold the most items (10,953). Watches are second in revenue with only 5859 items sold.
 - From the top 10 category in revenue, the furniture_decor has the lowest average prices (87.25 BRL) and housewares (90.60 BRL)
 - In every top 10 category the average price is higher than the median price (e.g. health_beauty: 130.28 vs 79.90 BRL; watches_gifts: 199.04 vs 128.90 BRL). This means that the distribution is right-skewed and a smaller number of expensive items pulls the average up, so the median is gonna describe a typical price better.
+## Price position: price dispersion within categories
+- Among categories with at least 100 items, the widest price dispersion (ratio of the 75th to the 25th price percentile) is in agro_industry_and_commerce (12.0; 35.0 BRL vs 420.0 BRL), followed by audio (8.79), costruction_tools_tools (6.35), small_appliances (6.09), christmas_supplies (5.80), musical_instruments (5.45) and consoles_games (5.27). The name costruction_tools_tools is spelled this way in the source data.
+- The narrowest dispersion is in industry_commerce_and_business (1.51), fashion_underwear_beach (1.60) and office_furniture (1.63).
+- A wide ratio can also mean that a category contains different types of products, so it does not by itself prove inconsistent pricing; this is checked at product level in the next step.
