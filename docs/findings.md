@@ -44,3 +44,14 @@
 - The offer furthest above the median price of the same product is a perfumery item sold for 99.00 BRL against a median of 23.90 BRL (price index 4.14), followed by a consoles_games item at 159.99 BRL against 49.99 BRL (3.20).
 - The other top rows shown have price indices between 2.50 and 2.73, e.g. agro_industry_and_commerce (59.99 vs 21.99 BRL) and health_beauty (95.00 vs 35.00 BRL).
 - The same offer can appear several times because each row is one sold item; one seller appears twice among the top rows shown (agro_industry_and_commerce and telephony).
+## Regional markets: metrics by customer state
+- SP has by far the highest revenue (5,067,633.16 BRL), followed by RJ (1,759,651.13 BRL) and MG (1,552,481.83 BRL); the lowest revenue among the 27 states is in RR (7,057.47 BRL).
+- SP also has the shortest average delivery time (8.26 days) and the lowest average freight (15.12 BRL), and the lowest average item price (109.10 BRL) among the states shown.
+- The longest average delivery times are in RR (27.83 days), AP (27.75 days) and AM (25.96 days). RR and PB have the highest average freight (43.09 BRL).
+- The lowest average review scores are in MA (3.76), PA (3.84), BA (3.86), RJ (3.87) and CE (3.87); the highest is in AP (4.26), followed by SP (4.18).
+- The highest average item prices are in PB (about 192 BRL), AL (184.67 BRL) and AC (175.07 BRL).
+- ## Regional markets: top cities by revenue
+- The city with the highest revenue is sao paulo (SP) with 1,859,556.83 BRL, followed by rio de janeiro (RJ) with 955,573.97 BRL and belo horizonte (MG) with 346,039.04 BRL.
+- The three cities from SP among the top 10 (sao paulo, campinas, guarulhos) have the shortest delivery times (7.56, 9.23 and 7.60 days) and the lowest average freight (14.28, 14.97 and 14.47 BRL).
+- salvador (BA) has the highest average freight (25.36 BRL), the longest average delivery time (18.68 days) and the lowest average review score (3.74) among the 10 cities shown.
+- Both RJ cities in the top 10 (rio de janeiro and niteroi) have average review scores below 4.0 (3.91 and 3.92).
