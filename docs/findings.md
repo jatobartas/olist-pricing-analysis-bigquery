@@ -40,3 +40,7 @@
 - Among categories with at least 100 items, the widest price dispersion (ratio of the 75th to the 25th price percentile) is in agro_industry_and_commerce (12.0; 35.0 BRL vs 420.0 BRL), followed by audio (8.79), costruction_tools_tools (6.35), small_appliances (6.09), christmas_supplies (5.80), musical_instruments (5.45) and consoles_games (5.27). The name costruction_tools_tools is spelled this way in the source data.
 - The narrowest dispersion is in industry_commerce_and_business (1.51), fashion_underwear_beach (1.60) and office_furniture (1.63).
 - A wide ratio can also mean that a category contains different types of products, so it does not by itself prove inconsistent pricing; this is checked at product level in the next step.
+## Price position: offers vs the market price of the same product
+- The offer furthest above the median price of the same product is a perfumery item sold for 99.00 BRL against a median of 23.90 BRL (price index 4.14), followed by a consoles_games item at 159.99 BRL against 49.99 BRL (3.20).
+- The other top rows shown have price indices between 2.50 and 2.73, e.g. agro_industry_and_commerce (59.99 vs 21.99 BRL) and health_beauty (95.00 vs 35.00 BRL).
+- The same offer can appear several times because each row is one sold item; one seller appears twice among the top rows shown (agro_industry_and_commerce and telephony).
