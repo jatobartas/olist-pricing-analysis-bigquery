@@ -64,3 +64,8 @@
 - `bed_bath_table` is the most popular category in 7 of the 10 cities (sao paulo, rio de janeiro, belo horizonte, porto alegre, campinas, guarulhos, niteroi).
 - `health_beauty` leads in 2 cities (brasilia, salvador) and `sports_leisure` leads in curitiba.
 - Sao paulo has the highest count: 1,950 items of `bed_bath_table`.
+## Delivery time and review score
+- Items delivered within 7 days have an average review score of 4.33 (38,720 items).
+- The average score falls with each longer delivery group: 4.2 for 8 to 14 days (41,716 items) and 4.02 for 15 to 21 days (17,479 items).
+- Items delivered after more than 21 days have an average review score of 2.97 (12,274 items).
+- Items without a delivery date are excluded from this analysis.
