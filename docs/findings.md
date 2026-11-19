@@ -55,3 +55,12 @@
 - The three cities from SP among the top 10 (sao paulo, campinas, guarulhos) have the shortest delivery times (7.56, 9.23 and 7.60 days) and the lowest average freight (14.28, 14.97 and 14.47 BRL).
 - salvador (BA) has the highest average freight (25.36 BRL), the longest average delivery time (18.68 days) and the lowest average review score (3.74) among the 10 cities shown.
 - Both RJ cities in the top 10 (rio de janeiro and niteroi) have average review scores below 4.0 (3.91 and 3.92).
+## Most popular category per state (top 10 states shown)
+- `bed_bath_table` is the most popular category in 5 of the 10 states (SP, RJ, MG, RS, GO).
+- `health_beauty` is the most popular category in 3 states (BA, DF, PE).
+- `furniture_decor` leads in PR (516 items) and `sports_leisure` leads in SC (356 items).
+- SP has the highest count: 5,157 items of `bed_bath_table`.
+## Most popular category per city (top 10 cities shown)
+- `bed_bath_table` is the most popular category in 7 of the 10 cities (sao paulo, rio de janeiro, belo horizonte, porto alegre, campinas, guarulhos, niteroi).
+- `health_beauty` leads in 2 cities (brasilia, salvador) and `sports_leisure` leads in curitiba.
+- Sao paulo has the highest count: 1,950 items of `bed_bath_table`.
