@@ -9,7 +9,7 @@ This project analyses data of Brazilian E-Commerce website Olist using BigQuery 
 3.
 
 ## Dashboard
-Full dashboard is available at the [dashboard](dashboard)
+Full Looker Studio Dashboard is available at the [Dashboard](dashboard)
 ## Data source
 [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 
