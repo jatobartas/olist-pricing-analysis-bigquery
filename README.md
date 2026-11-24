@@ -8,8 +8,6 @@ This project analyses data of Brazilian E-Commerce website Olist using BigQuery 
 
 This part of project is dedicated for the check of the quality of 9 tables that are included in the Dataset (from Kaggle). The process is conducted in BigQuery and is carried out to ensure the quality of the analysis. The full code is available in [`sql/01_data_audit.sql`](sql/01_data_audit.sql).
 
-<img width="713" height="326" alt="image" src="https://github.com/user-attachments/assets/a97aebef-b041-42f0-8969-b297ea757a5c" />
-
 ### Olist - overview
 ![01_overview](dashboard/screenshots/01_overview.png)
 ### Categories & prices
