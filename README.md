@@ -9,7 +9,7 @@ This project analyses data of Brazilian E-Commerce website Olist using BigQuery 
 
 This part of project is dedicated for the check of the quality of 9 tables that are included in the Dataset (from Kaggle). The process is conducted in BigQuery and is carried out to ensure the quality of the analysis. The full code is available in [`sql/01_data_check.sql`](sql/01_data_check.sql).
 
-1. **Row counts** - to get to know the data and see with how big dataset will I be working with. All CSV tables were loaded correctly. 
+#### 1. Row counts - to get to know the data and see with how big dataset will I be working with. All CSV tables were loaded correctly. 
 
 <div align="center">
   
@@ -30,7 +30,7 @@ This part of project is dedicated for the check of the quality of 9 tables that 
 Order_items may have a bit more rows than order_items - it may be because one order may contain multiple items. 
 We are starting with almost a 100k orders, 33k products, over 3k sellers. The thing that may gather attention is that orders and customers are the same number. It will have to be checked later.
 
-2. **Tables preview** - to see the column names and example data across different tables. The example query outcome is showed below.
+#### 2. Tables preview - to see the column names and example data across different tables. The example query outcome is showed below.
 
 <div align="center">
 
@@ -49,7 +49,7 @@ We are starting with almost a 100k orders, 33k products, over 3k sellers. The th
 
 </div>
 
-3. **Check of distinct keys** - to see if the keys are unique so joining the tables would be safe and not duplicate the rows.
+#### 3. Check of distinct keys - to see if the keys are unique so joining the tables would be safe and not duplicate the rows.
 
 <div align="center">
 
@@ -69,7 +69,7 @@ We are starting with almost a 100k orders, 33k products, over 3k sellers. The th
 
 Key are unique in: orders, products, sellers, category_translation. For order_items and order_payments it was needed to create a distinct key with forcing together order_id + order_item_id for order_items and order_id + payment_sequential for order_payments. Thanks to that - they can be joined safely. Customers has 99441 rows but only 96096 distinct customer_unique_id values (customer_id may be assigned per order). Customers will be counted with customer_unique_id. Order_reviews will be changed later to create a possibility of joining them with the rest of the data. Geolocation will not be joined to the other tables. 
 
-4. **Missing data in the most important columns** - missing values decide which rows can be used - we can't calculate the average delivery date for rows without delivery time.
+#### 4. Missing data in the most important columns - missing values decide which rows can be used - we can't calculate the average delivery date for rows without delivery time.
 
 <div align="center">
 
@@ -92,7 +92,7 @@ Key are unique in: orders, products, sellers, category_translation. For order_it
 Columns containing NULLs - order_approved_at (orders), order_delivered_customer_date (orders), product_category_name (products), product_weight_g (products).
 The column with time of approval won't be used. For the calculation of metrics with delivery date, metrics will use only the delivered ones, 610 products have no category so they will be marked as "uknown" so we don't loose the data. 2 products have no weight but it won't be needed for the analysis.
 
-5. **Check of order statuses and their share in the data + date range** - to check how many orders we're delivered (and their other statuses). Also to check what is the timestamp.
+#### 5. Check of order statuses and their share in the data + date range - to check how many orders we're delivered (and their other statuses). Also to check what is the timestamp.
    
 <div align="center">
 
@@ -121,7 +121,7 @@ Delivered orders have 97% of the whole deliveries, shipped have 1% (they were pr
 
 The first order was issued on 4th of September 2016, and the last one on 17th of October 2018. The timestamp is more than 2 years.
 
-6. **Price and freight check (min/max, average, median, zero values)** - to see the range of prices and freight costs and to spot extreme or zero values before calculating averages and medians.
+#### 6. Price and freight check (min/max, average, median, zero values) - to see the range of prices and freight costs and to spot extreme or zero values before calculating averages and medians.
 
 <div align="center">
 
@@ -133,7 +133,7 @@ The first order was issued on 4th of September 2016, and the last one on 17th of
 
 Item prices vary from 0.85 BRL to 6735 BRL. Average price is 120.65, median is 74.99 (Median is smaller than the average so it implies right-skeweness of the distribution - most of the products have smaller prices but some of them have much higher and that's why mean chases the tail and ends up higher than the median). The freight varies from 0 to 409.68 BRL and it's average is 20 BRL. Amount of orders with zero freight - 383.
 
-7. **Check if the dates are consistent and if there are any errors (orders without a date or delivered before they were purchased)**
+#### 7. Check if the dates are consistent and if there are any errors (orders without a date or delivered before they were purchased)
 
 <div align="center">
 
@@ -149,8 +149,8 @@ Eight of the orders were delivered without a delivery date and 0 were delivered 
 
 The raw data is spread across 9 tables. To avoid repeating the same joins in every query, one base view called big_table was created. It contains everything needed for the analysis, with one row per delivered order item.
 
-1. **Reviews made to be one row per order** - The data check in 1.3 showed that some of the orders have more than one review. Joining reviews directly to order items would duplicate those items and inflate revenue and item counts. A view reviews_per_order was created with the average score per order. After this every order has at maximum one review - it can be joined safely now.
-2. **Creation of one big table containing everything necessary for the analysis (big_table)** - a single table will be used for all the analysis queries. It was built step by step by joining: order_items + orders (purchase dates and delivery dates) + customers (customer_unique_id, customer state and city) + sellers (seller state and city) + reviews_per_order + products + category_translation (review score and product category). For the first join (items and orders) INNER JOIN was used to get only these rows that occur in both of the tables. For the rest (after having items and their orders) we join the rest with LEFT JOIN, so that we have everything that is in the base table and only those rows that are shared in this and the other tables.
+#### 1. Reviews made to be one row per order** - The data check in 1.3 showed that some of the orders have more than one review. Joining reviews directly to order items would duplicate those items and inflate revenue and item counts. A view reviews_per_order was created with the average score per order. After this every order has at maximum one review - it can be joined safely now.
+#### 2. Creation of one big table containing everything necessary for the analysis (big_table)** - a single table will be used for all the analysis queries. It was built step by step by joining: order_items + orders (purchase dates and delivery dates) + customers (customer_unique_id, customer state and city) + sellers (seller state and city) + reviews_per_order + products + category_translation (review score and product category). For the first join (items and orders) INNER JOIN was used to get only these rows that occur in both of the tables. For the rest (after having items and their orders) we join the rest with LEFT JOIN, so that we have everything that is in the base table and only those rows that are shared in this and the other tables.
 <div align="center">
    <img width="640" height="360" alt="image" src="https://github.com/user-attachments/assets/9e76caf7-5a96-4ab5-8c59-8d3ab92c3322" />
 </div>
@@ -167,7 +167,7 @@ The raw data is spread across 9 tables. To avoid repeating the same joins in eve
 
 And the big_table is created.
 
-3. **Validation (check if big_table was created properly, if any data was lost and no rows are duplicated)**
+#### 3. Validation (check if big_table was created properly, if any data was lost and no rows are duplicated)
 <div align="center">
 
 | check_name | value |
@@ -187,7 +187,7 @@ And the big_table is created.
 
 Table big_table has 110197 rows like it supposed to and every item key (order_id + order_item_id) is unique. 
 
-4. **Summary (missing values in big_table)**
+#### 4. Summary (missing values in big_table)
 
 Eight items have no delivery_days. The average and median ignore NULL so we leave them as they are. Filling in 0 would artificially lower the average delivery days. 827 items have no review score - no review doesn't mean a score of 0 so nothing is filled in. 1537 items are with a category 'unknown'. They are left here so the total analysis stays complete.
 
@@ -195,7 +195,7 @@ Eight items have no delivery_days. The average and median ignore NULL so we leav
 
 This stage describes the scale of the marketplace and sets reference values for all later analyses. All KPIs are calculated from big_table, so they cover delivered order items only.
 
-1. **Overall KPIs** - to find out basic business numbers as items sold, revenue, orders, sellers, customers, freight etc.
+#### 1. Overall KPIs - to find out basic business numbers as items sold, revenue, orders, sellers, customers, freight etc.
 
 Revenue is caluclated as sum of price, average order value is revenue divided by the number of distinct orders (one order can have multiple items so it has to be the amount of orders), customers are counted with customer_unique_id, median and 99th percentile are added because some of the items may pull the mean up. 
 
@@ -209,7 +209,7 @@ Revenue is caluclated as sum of price, average order value is revenue divided by
 
 The delivered orders contain 110197 items delivered in 96478 orders, sold by 2970 sellers across 32216 products - sold to 93358 customers. Revenue is 13.22 milion BRL and the freight is 2.19 mln BRL. The average order value is 137.04 BRL, an average order price is 119.98. Orders are delivered on average in 12 days and the average review score is 4.08/5.
 
-2. **Monthly trend** - to see how sales changed over time, find peak and lowest months, and check whether the peaks were caused by bigger sales or bigger basket (more items).
+#### 2. Monthly trend - to see how sales changed over time, find peak and lowest months, and check whether the peaks were caused by bigger sales or bigger basket (more items).
 
 The first 3 months are to sparse for analysis so they won't be taken into account.
 
@@ -245,7 +245,7 @@ The first 3 months are to sparse for analysis so they won't be taken into accoun
 
 Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of 8475 (987765.37 BRL revenue) in November 2017. The average order value was oscillating around the mean (137,04 BRL) and the revenue grew bigger. This means that sales grew because customers placed more orders, not because their baskets were more expensive.
 
-3. **Top 10 categories** - to find which product categories bring the most revenue, how many items they sold, their average price and median.
+#### 3. Top 10 categories - to find which product categories bring the most revenue, how many items they sold, their average price and median.
 
 <div align="center">
 
