@@ -9,9 +9,9 @@ This project analyses data of Brazilian E-Commerce website Olist using BigQuery 
   - [1. Data Check](#1-data-check)
   - [2. Cleaning](#2-cleaning)
   - [3. Overview](#3-overview)
-  - [Categories & prices](#categories--prices)
-  - [Regional markets](#regional-markets)
-  - [Delivery & satisfaction](#delivery--satisfaction)
+  - [4. Categories & prices](#4-categories--prices)
+  - [5. Regional markets](#5-regional-markets)
+  - [6. Delivery & satisfaction](#6-delivery--satisfaction)
 - [Looker Studio Dashboard](#looker-studio-dashboard)
 - [Data source](#data-source)
 - [Tools](#tools)
@@ -286,7 +286,7 @@ Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of
 
 The category with highest revenue is health_beauty 1233131.72 BRL and 9465 items. Watches & gifts has the second highest revenue with much less items sold. That is because their average price is very high. In every top 10 category the average price is higher than the median price.
 
-### Categories & prices
+### 4. Categories & prices
 #### 1. Prices in categories (25th percentile, median, 75th percentile)
 
 The 25th and 75th percentiles are added (the middle 50% of prices lies between them) which show the typical price range of a category.
@@ -353,7 +353,7 @@ The widest price dispertion is in agro_industry_and_commerce and it's 12. That m
 
 The highest above the median (market price) is an item sold in perfumery - sold for 99 BRL while the median is 23.9 BRL The lowest below the median is a product sold in audio with only 0.1 price index (which indicates that the product is sold way below the market price).
 
-### Regional markets
+### 5. Regional markets
 #### 1. Metrics by customer state
 
 To compare the regional markets of Brazil. For each customer state, the query shows revenue, average item price, average freight, average delivery time and average review score. This shows where sales are concentrated and where customers pay more for shipping, wait longer and rate their orders lower.
@@ -446,7 +446,7 @@ Ordered by items sold.
 
 Bed_bath_table is the most popular category in 7 of the 10 cities shown (sao paulo, rio de janeiro, belo horizonte, porto alegre, campinas, guarulhos, niteroi). Health_beauty leads in brasilia (242 items) and salvador (135 items), and furniture_decor leads in curitiba (151 items).
 
-### Delivery & satisfaction
+### 6. Delivery & satisfaction
 To check whether customers give lower ratings when they wait longer for delivery. Items are put into four delivery time groups with CASE WHEN, and the average review score is compared between the groups.
 
 #### 1. Delivery time and review score
