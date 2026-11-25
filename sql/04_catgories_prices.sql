@@ -14,6 +14,7 @@ SELECT category,
        APPROX_QUANTILES(price, 100)[OFFSET(75)] AS price_p75
 FROM `olist-pricing-analysis.olist.big_table`
 GROUP BY category
+HAVING COUNT(*) >= 100
 ORDER BY median_price DESC;
 
 -- ==========================================================================================================================================
