@@ -558,6 +558,56 @@ Ordered by items sold.
 Bed_bath_table is the most popular category in 7 of the 10 cities shown (sao paulo, rio de janeiro, belo horizonte, porto alegre, campinas, guarulhos, niteroi). Health_beauty leads in brasilia (242 items) and salvador (135 items), and furniture_decor leads in curitiba (151 items).
 
 ### Delivery & satisfaction
+To check whether customers give lower ratings when they wait longer for delivery. Items are put into four delivery time groups with CASE WHEN, and the average review score is compared between the groups.
+
+#### 1. Delivery time and review score
+<div align="center">
+
+| delivery_days_group | items_sold | average_review_score |
+|:---|---:|---:|
+| 1) Up to 7 days | 38720 | 4.33 |
+| 2) 8 to 14 days | 41716 | 4.2 |
+| 3) 15 to 21 days | 17479 | 4.02 |
+| Over 21 days | 12274 | 2.97 |
+
+</div>
+
+Items delivered up to 7 days have an average review score of 4.33/5. The score falls with each group. The last one over 21 days has an average score of 2.97/5. There may be a correlation between the review score and delivery time (the review score may decrease with the inscrease in delivery time).
+#### 2. Top 10 sellers by revenue
+To see how revenue is spread across the biggest sellers and whether the sellers with the highest sales also have good review scores.
+
+<div align="center">
+
+| seller_id | revenue | avg_review_score |
+|:---|---:|---:|
+| 4869f7a5dfa277a7dca6462dcf3b52b2 | 226987.93 | 4.14 |
+| 53243585a1d6dc2643021fd1853d8905 | 217940.44 | 4.13 |
+| 4a3ca9315b744ce9f8e9374361493884 | 196882.12 | 3.83 |
+| fa1c13f2614d7b5c4749cbc52fecda94 | 190917.14 | 4.37 |
+| 7c67e1448b00f6e969d365cea6b010ab | 186570.05 | 3.35 |
+| 7e93a43ef30c4f03f38b393420bc753a | 165981.49 | 4.36 |
+| da8622b14eb17ae2831f4ac5b9dab84a | 159816.87 | 4.07 |
+| 7a67c85e85bb2ce8582c35f2203ad736 | 139658.69 | 4.27 |
+| 1025f0e2d44d7041d6cf58b6550e0bfa | 138208.56 | 3.87 |
+| 955fee9216a65b617aa5c0531780ce60 | 131836.71 | 4.09 |
+
+</div>
+
+Top seller made 226987 BRL in revenue and has the review of avg 4.14/5. The 5th best seller made 186570 BRL in revenue but has a much lower score than average which is 3.35/5.
+
+#### 3. Same-state vs cross-state shipping
+To check whether shipping within the same state is faster and cheaper than shipping between states. Each item is labelled "same state" when the seller and the customer are in the same state, and "different state" otherwise.
+
+<div align="center">
+
+| shipping_type | avg_delivery_days | avg_freight_value |
+|:---|---:|---:|
+| different state | 14.58 | 24.0 |
+| same state | 7.46 | 13.0 |
+
+</div>
+
+Items delivered across different states have higher average delivery time (14.58) than ones that are delivered in the same state (7.46). Average freight is more expensive in cross-state deliveries (24 BRL) than in the same state (13 BRL). 
 
 ### Pricing & sellers
 
