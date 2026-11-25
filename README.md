@@ -3,6 +3,20 @@
 ## Introduction
 This project analyses data of Brazilian E-Commerce website Olist using BigQuery and Looker Studio. The main goal of the analysis is to draw some insights from the Data and to create specific business recomendations depending on the outcome. The focus is put on understanding the market sells, prices (across categories), sales (across regions), delivery time, freight cost and customer satisfaction.
 
+## Table of contents
+
+- [Analysis (BigQuery & Looker Studio)](#analysis-bigquery--looker-studio)
+  - [1. Data Check](#1-data-check)
+  - [2. Cleaning](#2-cleaning)
+  - [3. Overview](#3-overview)
+  - [Categories & prices](#categories--prices)
+  - [Regional markets](#regional-markets)
+  - [Delivery & satisfaction](#delivery--satisfaction)
+- [Looker Studio Dashboard](#looker-studio-dashboard)
+- [Data source](#data-source)
+- [Tools](#tools)
+- [Author](#author)
+  
 ## Analysis (BigQuery & Looker Studio)
 
 ### 1. Data Check
