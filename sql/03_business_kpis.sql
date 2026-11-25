@@ -1,19 +1,11 @@
 -- ===========================================================================================================================================
 -- 03_business_kpis.sql
--- Project : Price Position and Market Analysis of an E-commerce Marketplace
--- Purpose : Business KPIs calculated from the base view big_table (delivered order items only).
--- Contents
---   3.1 Overall KPIs
---   3.2 Monthly trend
---   3.3 Top 10 categories
+--   3.1 OVERALL KPIs
+--   3.2 MONTHLY TREND
+--   3.3 TOP 10 CATEGORIES
 
 --===========================================================================================================================================
 -- 3.1 OVERALL KPIs
--- Revenue = sum of item prices (freight not included).
--- Average order value = revenue / number of distinct orders.
--- Customers are counted with customer_unique_id (a real customer);
--- customer_id is assigned per order.
--- AVG ignores NULL values (missing delivery days and review scores).
 
 SELECT *
 FROM `olist-pricing-analysis.olist.big_table`
@@ -37,8 +29,6 @@ FROM `olist-pricing-analysis.olist.big_table`;
 
 -- ==========================================================================================================================================
 -- 3.2 MONTHLY TREND
--- Orders, items, revenue and average order value per purchase month.
--- Used to see growth and seasonality and to check whether the first and last months of the data are too standing out to be shown in trends.
 
 SELECT purchase_month,
 COUNT(*) AS items_sold, 
@@ -57,8 +47,6 @@ ORDER BY revenue);
 
 --==========================================================================================================================================
 -- 3.3 TOP 10 CATEGORIES
--- Revenue, items sold, average and median price and share of total revenue for the 10 categories with the highest revenue.
--- Category "unknown" (products without category) is kept in the totals.
 
 SELECT *
 FROM `olist-pricing-analysis.olist.big_table`
@@ -74,6 +62,3 @@ FROM `olist-pricing-analysis.olist.big_table`
 GROUP BY category
 ORDER BY revenue DESC
 LIMIT 10;
-
---============================================================================================================================================
-
