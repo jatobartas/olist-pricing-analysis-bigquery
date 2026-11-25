@@ -5,7 +5,7 @@ This project analyses data of Brazilian E-Commerce website Olist using BigQuery 
 
 ## Analysis (BigQuery & Looker Studio)
 
-### Data Check
+### 1. Data Check
 
 This part of project is dedicated for the check of the quality of 9 tables that are included in the Dataset (from Kaggle). The process is conducted in BigQuery and is carried out to ensure the quality of the analysis. The full code is available in [`sql/01_data_check.sql`](sql/01_data_check.sql).
 
@@ -145,7 +145,10 @@ Item prices vary from 0.85 BRL to 6735 BRL. Average price is 120.65, median is 7
 
 Eight of the orders were delivered without a delivery date and 0 were delivered before purchase - everything works.
 
-### Cleaning
+### 2. Cleaning
+
+The raw data is spread across 9 tables. To avoid repeating the same joins in every query, one base view called big_table was created. It contains everything needed for the analysis, with one row per delivered order item.
+
 1. **Reviews made to be one row per order** - The data check in 1.3 showed that some of the orders have more than one review. Joining reviews directly to order items would duplicate those items and inflate revenue and item counts. A view reviews_per_order was created with the average score per order. After this every order has at maximum one review - it can be joined safely now.
 2. **Creation of one big table containing everything necessary for the analysis (big_table)** - a single table will be used for all the analysis queries. It was built step by step by joining: order_items + orders (purchase dates and delivery dates) + customers (customer_unique_id, customer state and city) + sellers (seller state and city) + reviews_per_order + products + category_translation (review score and product category). For the first join (items and orders) INNER JOIN was used to get only these rows that occur in both of the tables. For the rest (after having items and their orders) we join the rest with LEFT JOIN, so that we have everything that is in the base table and only those rows that are shared in this and the other tables.
 <div align="center">
@@ -185,9 +188,83 @@ And the big_table is created.
 Table big_table has 110197 rows like it supposed to and every item key (order_id + order_item_id) is unique. 
 
 4. **Summary (missing values in big_table)**
+
 Eight items have no delivery_days. The average and median ignore NULL so we leave them as they are. Filling in 0 would artificially lower the average delivery days. 827 items have no review score - no review doesn't mean a score of 0 so nothing is filled in. 1537 items are with a category 'unknown'. They are left here so the total analysis stays complete.
 
-### Overview
+### 3. Overview
+
+This stage describes the scale of the marketplace and sets reference values for all later analyses. All KPIs are calculated from big_table, so they cover delivered order items only.
+
+1. **Overall KPIs** - to find out basic business numbers as items sold, revenue, orders, sellers, customers, freight etc.
+
+Revenue is caluclated as sum of price, average order value is revenue divided by the number of distinct orders (one order can have multiple items so it has to be the amount of orders), customers are counted with customer_unique_id, median and 99th percentile are added because some of the items may pull the mean up. 
+
+<div align="center">
+
+| items_sold | orders | products | sellers | customers | revenue | mln_revenue | total_freight | average_order_value | avg_price | median_item_price | ninetynine_percentil_price | average_delivery_days | average_review_score |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 110197 | 96478 | 32216 | 2970 | 93358 | 13221498.11 | 13.221 | 2198275.64 | 137.04 | 119.98 | 74.9 | 888.9 | 12.0 | 4.08 |
+
+</div>
+
+The delivered orders contain 110197 items delivered in 96478 orders, sold by 2970 sellers across 32216 products - sold to 93358 customers. Revenue is 13.22 milion BRL and the freight is 2.19 mln BRL. The average order value is 137.04 BRL, an average order price is 119.98. Orders are delivered on average in 12 days and the average review score is 4.08/5.
+
+2. **Monthly trend** - to see how sales changed over time, find peak and lowest months, and check whether the peaks were caused by bigger sales or bigger basket (more items).
+
+The first 3 months are to sparse for analysis so they won't be taken into account.
+
+<div align="center">
+
+| purchase_month | items_sold | revenue | average_order_value |
+|:---|---:|---:|---:|
+| 2016-09-01 | 3 | 134.97 | 134.97 |
+| 2016-10-01 | 313 | 40325.11 | 152.17 |
+| 2016-12-01 | 1 | 10.9 | 10.9 |
+| 2017-01-01 | 913 | 111798.36 | 149.06 |
+| 2017-02-01 | 1858 | 234223.4 | 141.7 |
+| 2017-03-01 | 2897 | 359198.85 | 141.08 |
+| 2017-04-01 | 2569 | 340669.68 | 147.92 |
+| 2017-05-01 | 4004 | 489338.25 | 138.0 |
+| 2017-06-01 | 3489 | 421923.37 | 134.58 |
+| 2017-07-01 | 4416 | 481604.52 | 124.38 |
+| 2017-08-01 | 4797 | 554699.7 | 132.29 |
+| 2017-09-01 | 4737 | 607399.67 | 146.36 |
+| 2017-10-01 | 5214 | 648247.65 | 144.76 |
+| 2017-11-01 | 8475 | 987765.37 | 135.51 |
+| 2017-12-01 | 6187 | 726033.19 | 131.69 |
+| 2018-01-01 | 8037 | 924645.0 | 130.8 |
+| 2018-02-01 | 7518 | 826437.13 | 126.08 |
+| 2018-03-01 | 8017 | 953356.25 | 136.14 |
+| 2018-04-01 | 7827 | 973534.09 | 143.21 |
+| 2018-05-01 | 7810 | 977544.69 | 144.84 |
+| 2018-06-01 | 7010 | 856077.86 | 140.36 |
+| 2018-07-01 | 6963 | 867953.46 | 140.92 |
+| 2018-08-01 | 7142 | 838576.64 | 132.04 |
+
+</div>
+
+Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of 8475 (987765.37 BRL revenue) in November 2017. The average order value was oscillating around the mean (137,04 BRL) and the revenue grew bigger. This means that sales grew because customers placed more orders, not because their baskets were more expensive.
+
+3. **Top 10 categories** - to find which product categories bring the most revenue, how many items they sold, their average price and median.
+
+<div align="center">
+
+| category | revenue | items_sold | average_price | median_price |
+|:---|---:|---:|---:|---:|
+| health_beauty | 1233131.72 | 9465 | 130.28 | 79.9 |
+| watches_gifts | 1166176.98 | 5859 | 199.04 | 128.9 |
+| bed_bath_table | 1023434.76 | 10953 | 93.44 | 79.57 |
+| sports_leisure | 954852.55 | 8431 | 113.25 | 76.9 |
+| computers_accessories | 888724.61 | 7644 | 116.26 | 81.99 |
+| furniture_decor | 711927.69 | 8160 | 87.25 | 65.49 |
+| housewares | 615628.69 | 6795 | 90.6 | 59.7 |
+| cool_stuff | 610204.1 | 3718 | 164.12 | 129.9 |
+| auto | 578966.65 | 4140 | 139.85 | 84.9 |
+| toys | 471286.48 | 4030 | 116.94 | 79.9 |
+
+</div>
+
+The category with highest revenue is health_beauty 1233131.72 BRL and 9465 items. Watches & gifts has the second highest revenue with much less items sold. That is because their average price is very high. In every top 10 category the average price is higher than the median price.
 
 ### Categories & prices
 
