@@ -1,15 +1,15 @@
 -- ===========================================================================================================================================
 -- 01_data_check.sql
---   0.1 ROW COUNTS
---   0.2 TABLES PREVIEW
---   1.1 CHECK OF DISTINCT KEYS
---   1.2 MISSING DATA (IN THE MOST IMPORTANT COLUMNS)
---   1.3 CHECK OF ORDER STATUSES AND THEIR PART IN THE DATA + DATES RANGE (MAX/MIN)
---   1.4 PRICE AND FREIGHT CHECK (MAX/MIN, AVERAGE, MEDIAN, ZERO VALUES)
---   1.5 CHECK IF THE DATES ARE CONSISTENT AND IF THERE ARE ANY MISTAKES (ORDERS WITHOUT A DATE OR DELIVERED BEFORE THEY WERE PURCHASED)
+--   1.1 ROW COUNTS
+--   1.2 TABLES PREVIEW
+--   1.3 CHECK OF DISTINCT KEYS
+--   1.4 MISSING DATA (IN THE MOST IMPORTANT COLUMNS)
+--   1.5 CHECK OF ORDER STATUSES AND THEIR PART IN THE DATA + DATES RANGE (MAX/MIN)
+--   1.6 PRICE AND FREIGHT CHECK (MAX/MIN, AVERAGE, MEDIAN, ZERO VALUES)
+--   1.6 CHECK IF THE DATES ARE CONSISTENT AND IF THERE ARE ANY MISTAKES (ORDERS WITHOUT A DATE OR DELIVERED BEFORE THEY WERE PURCHASED)
 
 -- ===========================================================================================================================================
---0.1 ROW COUNTS
+--1.1 ROW COUNTS
 
 SELECT 'orders' AS table_name, COUNT(*) AS row_count
 FROM `olist-pricing-analysis.olist.orders`
@@ -39,7 +39,7 @@ SELECT 'geolocation', COUNT(*)
 FROM `olist-pricing-analysis.olist.geolocation`;
 
 -- ===========================================================================================================================================
---0.2 TABLES PREVIEW
+--1.2 TABLES PREVIEW
 
 SELECT * 
 FROM `olist-pricing-analysis.olist.category_translation` 
@@ -65,7 +65,7 @@ FROM `olist-pricing-analysis.olist.category_translation`
 LIMIT 10;
 
 -- ===========================================================================================================================================
---1.1 CHECK OF DISTINCT KEYS
+--1.3 CHECK OF DISTINCT KEYS
 
 SELECT 'orders' AS table_name, COUNT(*) AS row_count, COUNT(DISTINCT(order_id)) AS distinct_rows_count
 FROM `olist-pricing-analysis.olist.orders`
@@ -95,7 +95,7 @@ SELECT 'geolocation (zip code prefix)', COUNT(*),COUNT(DISTINCT geolocation_zip_
 FROM `olist-pricing-analysis.olist.geolocation`;
 
 --===========================================================================================================================================
---1.2 MISSING DATA (IN THE MOST IMPORTANT COLUMNS)
+--1.4 MISSING DATA (IN THE MOST IMPORTANT COLUMNS)
 
 SELECT 'orders' AS table_name, 'order_approved_at' AS column_name,COUNTIF(order_approved_at IS NULL) AS null_rows, COUNT(*) AS total_rows
 FROM `olist-pricing-analysis.olist.orders`
@@ -131,7 +131,7 @@ SELECT 'order_reviews', 'review_score', COUNTIF(review_score IS NULL), COUNT(*)
 FROM `olist-pricing-analysis.olist.order_reviews`;
 
 --===========================================================================================================================================
---1.3 CHECK OF ORDER STATUSES AND THEIR PART IN THE DATA + DATES RANGE
+--1.5 CHECK OF ORDER STATUSES AND THEIR PART IN THE DATA + DATES RANGE
 
 SELECT * 
 FROM `olist-pricing-analysis.olist.orders`
@@ -161,7 +161,7 @@ COUNTIF(freight_value = 0) AS zero_freight
 FROM `olist-pricing-analysis.olist.order_items`;
 
 --==========================================================================================================================================
---1.5 CHECK IF THE DATES ARE CONSISTENT AND IF THERE ARE ANY MISTAKES (ORDERS WITHOUT A DATE OR DELIVERED BEFORE THEY WERE PURCHASED)
+--1.6 CHECK IF THE DATES ARE CONSISTENT AND IF THERE ARE ANY MISTAKES (ORDERS WITHOUT A DATE OR DELIVERED BEFORE THEY WERE PURCHASED)
 
 SELECT
   COUNTIF(order_status = 'delivered' AND order_delivered_customer_date IS NULL) AS delivered_without_date,
