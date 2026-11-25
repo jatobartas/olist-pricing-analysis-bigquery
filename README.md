@@ -292,50 +292,6 @@ Only categories with at least 100 items sold are included, for the medians to be
 | watches_gifts | 5859 | 59.0 | 128.9 | 209.9 |
 | construction_tools_safety | 183 | 65.0 | 115.0 | 285.0 |
 | kitchen_dining_laundry_garden_furniture | 274 | 54.9 | 109.0 | 209.9 |
-| furniture_living_room | 495 | 69.99 | 103.97 | 139.9 |
-| industry_commerce_and_business | 265 | 78.0 | 102.0 | 118.0 |
-| construction_tools_lights | 301 | 45.0 | 100.0 | 228.0 |
-| luggage_accessories | 1077 | 59.99 | 99.99 | 148.5 |
-| art | 197 | 55.0 | 99.9 | 99.99 |
-| small_appliances | 658 | 49.1 | 98.0 | 299.0 |
-| home_construction | 596 | 49.95 | 95.2 | 150.0 |
-| musical_instruments | 651 | 55.0 | 94.9 | 299.9 |
-| home_confort | 429 | 86.9 | 89.9 | 179.0 |
-| pet_shop | 1924 | 45.9 | 89.7 | 119.99 |
-| audio | 362 | 19.9 | 89.0 | 175.0 |
-| construction_tools_construction | 916 | 40.9 | 86.6 | 155.6 |
-| perfumery | 3340 | 49.99 | 84.99 | 149.9 |
-| auto | 4140 | 39.49 | 84.9 | 155.0 |
-| computers_accessories | 7644 | 39.9 | 81.99 | 149.0 |
-| health_beauty | 9465 | 39.99 | 79.9 | 129.9 |
-| toys | 4030 | 45.99 | 79.9 | 129.9 |
-| bed_bath_table | 10953 | 47.99 | 79.57 | 115.0 |
-| stationery | 2466 | 44.0 | 79.0 | 114.9 |
-| baby | 2982 | 48.9 | 77.98 | 134.9 |
-| sports_leisure | 8431 | 43.99 | 76.9 | 129.9 |
-| signaling_and_security | 197 | 29.0 | 75.0 | 134.0 |
-| fashion_shoes | 257 | 35.9 | 74.9 | 99.9 |
-| unknown | 1537 | 34.98 | 69.99 | 122.99 |
-| furniture_decor | 8160 | 39.9 | 65.49 | 99.9 |
-| market_place | 305 | 30.0 | 62.8 | 109.9 |
-| costruction_tools_tools | 103 | 29.9 | 59.99 | 190.0 |
-| fashion_underwear_beach | 127 | 49.9 | 59.9 | 79.9 |
-| garden_tools | 4268 | 49.9 | 59.9 | 99.9 |
-| fashion_male_clothing | 125 | 43.0 | 59.9 | 127.9 |
-| housewares | 6795 | 32.0 | 59.7 | 114.9 |
-| books_technical | 263 | 30.0 | 57.49 | 88.5 |
-| consoles_games | 1089 | 24.5 | 54.89 | 129.0 |
-| costruction_tools_garden | 232 | 29.45 | 49.9 | 122.9 |
-| fashion_bags_accessories | 1985 | 34.3 | 49.0 | 74.99 |
-| food | 499 | 27.9 | 49.0 | 80.49 |
-| fixed_telephony | 255 | 29.9 | 49.0 | 139.99 |
-| home_appliances | 754 | 27.2 | 47.59 | 115.0 |
-| drinks | 361 | 29.49 | 47.49 | 58.0 |
-| christmas_supplies | 150 | 13.77 | 45.8 | 79.9 |
-| books_general_interest | 537 | 30.0 | 45.0 | 115.0 |
-| food_drink | 269 | 22.81 | 39.0 | 54.0 |
-| telephony | 4430 | 21.99 | 29.99 | 49.0 |
-| electronics | 2729 | 14.89 | 21.89 | 52.5 |
 
 </div>
 
@@ -357,50 +313,6 @@ Two categories can have a similar median price but a very different spread of pr
 | construction_tools_lights | 301 | 45.0 | 100.0 | 228.0 | 5.07 |
 | fixed_telephony | 255 | 29.9 | 49.0 | 139.99 | 4.68 |
 | signaling_and_security | 197 | 29.0 | 75.0 | 134.0 | 4.62 |
-| construction_tools_safety | 183 | 65.0 | 115.0 | 285.0 | 4.38 |
-| home_appliances | 754 | 27.2 | 47.59 | 115.0 | 4.23 |
-| costruction_tools_garden | 232 | 29.45 | 49.9 | 122.9 | 4.17 |
-| auto | 4140 | 39.49 | 84.9 | 155.0 | 3.93 |
-| books_general_interest | 537 | 30.0 | 45.0 | 115.0 | 3.83 |
-| kitchen_dining_laundry_garden_furniture | 274 | 54.9 | 109.0 | 209.9 | 3.82 |
-| construction_tools_construction | 916 | 40.9 | 86.6 | 155.6 | 3.8 |
-| computers_accessories | 7644 | 39.9 | 81.99 | 149.0 | 3.73 |
-| market_place | 305 | 30.0 | 62.8 | 109.9 | 3.66 |
-| home_appliances_2 | 231 | 154.0 | 227.99 | 559.0 | 3.63 |
-| housewares | 6795 | 32.0 | 59.7 | 114.9 | 3.59 |
-| watches_gifts | 5859 | 59.0 | 128.9 | 209.9 | 3.56 |
-| electronics | 2729 | 14.89 | 21.89 | 52.5 | 3.53 |
-| unknown | 1537 | 34.98 | 69.99 | 122.99 | 3.52 |
-| health_beauty | 9465 | 39.99 | 79.9 | 129.9 | 3.25 |
-| perfumery | 3340 | 49.99 | 84.99 | 149.9 | 3.0 |
-| home_construction | 596 | 49.95 | 95.2 | 150.0 | 3.0 |
-| fashion_male_clothing | 125 | 43.0 | 59.9 | 127.9 | 2.97 |
-| sports_leisure | 8431 | 43.99 | 76.9 | 129.9 | 2.95 |
-| books_technical | 263 | 30.0 | 57.49 | 88.5 | 2.95 |
-| food | 499 | 27.9 | 49.0 | 80.49 | 2.88 |
-| cool_stuff | 3718 | 69.9 | 129.9 | 199.0 | 2.85 |
-| toys | 4030 | 45.99 | 79.9 | 129.9 | 2.82 |
-| fashion_shoes | 257 | 35.9 | 74.9 | 99.9 | 2.78 |
-| baby | 2982 | 48.9 | 77.98 | 134.9 | 2.76 |
-| air_conditioning | 289 | 75.9 | 139.99 | 199.0 | 2.62 |
-| pet_shop | 1924 | 45.9 | 89.7 | 119.99 | 2.61 |
-| stationery | 2466 | 44.0 | 79.0 | 114.9 | 2.61 |
-| furniture_decor | 8160 | 39.9 | 65.49 | 99.9 | 2.5 |
-| luggage_accessories | 1077 | 59.99 | 99.99 | 148.5 | 2.48 |
-| bed_bath_table | 10953 | 47.99 | 79.57 | 115.0 | 2.4 |
-| food_drink | 269 | 22.81 | 39.0 | 54.0 | 2.37 |
-| furniture_bedroom | 103 | 95.0 | 179.0 | 219.0 | 2.31 |
-| telephony | 4430 | 21.99 | 29.99 | 49.0 | 2.23 |
-| fashion_bags_accessories | 1985 | 34.3 | 49.0 | 74.99 | 2.19 |
-| home_confort | 429 | 86.9 | 89.9 | 179.0 | 2.06 |
-| computers | 199 | 650.0 | 1100.0 | 1340.0 | 2.06 |
-| garden_tools | 4268 | 49.9 | 59.9 | 99.9 | 2.0 |
-| furniture_living_room | 495 | 69.99 | 103.97 | 139.9 | 2.0 |
-| drinks | 361 | 29.49 | 47.49 | 58.0 | 1.97 |
-| art | 197 | 55.0 | 99.9 | 99.99 | 1.82 |
-| office_furniture | 1668 | 114.99 | 144.94 | 186.99 | 1.63 |
-| fashion_underwear_beach | 127 | 49.9 | 59.9 | 79.9 | 1.6 |
-| industry_commerce_and_business | 265 | 78.0 | 102.0 | 118.0 | 1.51 |
 
 </div>
 
@@ -422,16 +334,6 @@ The widest price dispertion is in agro_industry_and_commerce and it's 12. That m
 | beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 95.0 | 35.0 | 2.71 |
 | f27e33c6d29b5138fa9967bcd445b6d5 | 7ac0d3f8ac5b60c13d74b02b8cbb4623 | pet_shop | 239.9 | 94.9 | 2.53 |
 | 6edacfd9f9074789dad6d62ba7950b9c | 081476f0ad46b45e23bbd0f3d1d4dd98 | housewares | 49.9 | 19.9 | 2.51 |
-| 0afccdb8a34ee5c79f7c06faf2b4d56e | 80103e141ed0da3b1d63cb0c7d1f7d48 | telephony | 99.9 | 39.9 | 2.5 |
-| 0afccdb8a34ee5c79f7c06faf2b4d56e | 9ac3471b9357338ea8054108a00389e3 | telephony | 99.9 | 39.9 | 2.5 |
-| 16090f2ca825584b5a147ab24aa30c86 | 4520766ec412348b8d4caa5e8a18c464 | auto | 99.99 | 40.0 | 2.5 |
-| ef506c96320abeedfb894c34db06f478 | 500870614ddcf5bd84f7d26861026c8a | telephony | 34.99 | 14.0 | 2.5 |
-| ef506c96320abeedfb894c34db06f478 | 500870614ddcf5bd84f7d26861026c8a | telephony | 34.99 | 14.0 | 2.5 |
-| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
-| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
-| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
-| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
-| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
 
 </div>
 
@@ -456,23 +358,6 @@ To compare the regional markets of Brazil. For each customer state, the query sh
 | DF | 296498.41 | 125.9 | 21.07 | 12.5 | 4.06 |
 | GO | 282836.7 | 124.21 | 22.56 | 14.95 | 4.04 |
 | ES | 268643.45 | 120.74 | 22.03 | 15.19 | 4.01 |
-| PE | 251889.49 | 144.27 | 32.69 | 17.79 | 4.02 |
-| CE | 219757.38 | 154.11 | 32.73 | 20.54 | 3.87 |
-| PA | 174470.59 | 165.53 | 35.63 | 23.3 | 3.84 |
-| MT | 152191.62 | 146.76 | 28.0 | 17.51 | 4.01 |
-| MA | 117009.38 | 146.26 | 38.49 | 21.2 | 3.76 |
-| MS | 115429.97 | 142.33 | 23.35 | 15.11 | 4.06 |
-| PB | 112586.82 | 192.13 | 43.09 | 20.12 | 4.04 |
-| PI | 84721.0 | 161.99 | 39.12 | 18.93 | 3.96 |
-| RN | 82105.66 | 157.59 | 35.72 | 18.87 | 4.11 |
-| AL | 78855.72 | 184.67 | 35.87 | 23.99 | 3.83 |
-| SE | 56574.19 | 150.86 | 36.57 | 20.98 | 3.9 |
-| TO | 48402.51 | 156.14 | 37.44 | 17.0 | 4.16 |
-| RO | 45682.76 | 167.34 | 41.33 | 19.28 | 4.07 |
-| AM | 22155.84 | 135.93 | 33.31 | 25.96 | 4.11 |
-| AC | 15930.97 | 175.07 | 40.05 | 20.33 | 4.13 |
-| AP | 13374.81 | 165.12 | 34.16 | 27.75 | 4.26 |
-| RR | 7057.47 | 153.42 | 43.09 | 27.83 | 3.89 |
 
 </div>
 
@@ -495,16 +380,6 @@ A state can include both a large city and small towns, so the same metrics are c
 | salvador | BA | 173273.05 | 127.59 | 25.36 | 18.68 | 3.74 |
 | guarulhos | SP | 139008.19 | 107.43 | 14.47 | 7.6 | 4.13 |
 | niteroi | RJ | 115890.26 | 120.97 | 20.42 | 13.76 | 3.92 |
-| sao bernardo do campo | SP | 102514.23 | 98.48 | 13.71 | 7.74 | 4.31 |
-| santos | SP | 98349.4 | 120.82 | 15.75 | 8.62 | 4.1 |
-| goiania | GO | 96547.85 | 123.15 | 21.37 | 14.72 | 4.08 |
-| fortaleza | CE | 93269.67 | 134.39 | 28.36 | 19.99 | 3.84 |
-| santo andre | SP | 89380.83 | 102.5 | 14.21 | 7.42 | 4.27 |
-| recife | PE | 85186.33 | 129.86 | 29.89 | 17.74 | 3.93 |
-| florianopolis | SC | 84043.85 | 129.5 | 21.28 | 14.42 | 3.97 |
-| osasco | SP | 80820.34 | 97.26 | 13.99 | 7.04 | 4.26 |
-| jundiai | SP | 80398.04 | 125.23 | 15.45 | 8.36 | 4.17 |
-| belem | PA | 78002.75 | 164.56 | 31.47 | 21.28 | 3.87 |
 
 </div>
 
@@ -609,7 +484,6 @@ To check whether shipping within the same state is faster and cheaper than shipp
 
 Items delivered across different states have higher average delivery time (14.58) than ones that are delivered in the same state (7.46). Average freight is more expensive in cross-state deliveries (24 BRL) than in the same state (13 BRL). 
 
-### Pricing & sellers
 
 ## Looker Studio Dashboard
 Full Looker Studio Dashboard is available at the [Dashboard](dashboard)
