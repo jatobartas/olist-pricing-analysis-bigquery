@@ -6,7 +6,7 @@
 --   1.4 MISSING DATA (IN THE MOST IMPORTANT COLUMNS)
 --   1.5 CHECK OF ORDER STATUSES AND THEIR PART IN THE DATA + DATES RANGE (MAX/MIN)
 --   1.6 PRICE AND FREIGHT CHECK (MAX/MIN, AVERAGE, MEDIAN, ZERO VALUES)
---   1.6 CHECK IF THE DATES ARE CONSISTENT AND IF THERE ARE ANY MISTAKES (ORDERS WITHOUT A DATE OR DELIVERED BEFORE THEY WERE PURCHASED)
+--   1.7 CHECK IF THE DATES ARE CONSISTENT AND IF THERE ARE ANY MISTAKES (ORDERS WITHOUT A DATE OR DELIVERED BEFORE THEY WERE PURCHASED)
 
 -- ===========================================================================================================================================
 --1.1 ROW COUNTS
@@ -146,7 +146,7 @@ SELECT MIN(order_purchase_timestamp) AS first_order, MAX(order_purchase_timestam
 FROM`olist-pricing-analysis.olist.orders`;
 
 --==========================================================================================================================================
---1.4 PRICE AND FREIGHT CHECK (MAX/MIN, AVERAGE, MEDIAN, ZERO VALUES)
+--1.5 PRICE AND FREIGHT CHECK (MAX/MIN, AVERAGE, MEDIAN, ZERO VALUES)
 
 SELECT COUNT(*) AS ITEMS,
 MIN(price) AS min_price,
@@ -161,7 +161,7 @@ COUNTIF(freight_value = 0) AS zero_freight
 FROM `olist-pricing-analysis.olist.order_items`;
 
 --==========================================================================================================================================
---1.6 CHECK IF THE DATES ARE CONSISTENT AND IF THERE ARE ANY MISTAKES (ORDERS WITHOUT A DATE OR DELIVERED BEFORE THEY WERE PURCHASED)
+--1.7 CHECK IF THE DATES ARE CONSISTENT AND IF THERE ARE ANY MISTAKES (ORDERS WITHOUT A DATE OR DELIVERED BEFORE THEY WERE PURCHASED)
 
 SELECT
   COUNTIF(order_status = 'delivered' AND order_delivered_customer_date IS NULL) AS delivered_without_date,
