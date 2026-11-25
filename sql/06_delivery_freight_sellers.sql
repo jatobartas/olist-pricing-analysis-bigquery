@@ -25,7 +25,7 @@ GROUP BY delivery_days_group
 ORDER BY delivery_days_group;
 
 --==========================================================================================================================================
--- 6.2 TOP 10 SELLERS BY REVENUE (AND THEIR AVARAGE REVIEW SCORE)
+-- 6.2 TOP 10 SELLERS BY REVENUE (AND THEIR AVERAGE REVIEW SCORE)
 
 SELECT *
 FROM `olist-pricing-analysis.olist.big_table`;
