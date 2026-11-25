@@ -1,5 +1,5 @@
 -- ===========================================================================================================================================
--- 06_delivery_freight_sellers.sql
+-- 06_delivery_satisfaction_sellers.sql
 --   6.1 DELIVERY TIME AND REVIEW SCOREAND CORRELATION (ITEMS WITHOUT A DELIVERY DATE ARE EXCLUDED)
 --   6.2 TOP 10 SELLERS BY REVENUE (AND THEIR AVARAGE REVIEW SCORE)
 --   6.3 SAME STATE/CROSS STATE DIFFERENCES IN SHIPPING DELIVERY TIME AND FREIGHT COST
