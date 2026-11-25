@@ -1,16 +1,11 @@
 -- ===========================================================================================================================================
--- Project:  Price Position and Market Analysis of an E-commerce Marketplace
--- File:     06_delivery_freight_sellers.sql
--- Purpose:  Explore delivery time, freight cost and seller performance.
---
--- Contents:
---   6.1 Delivery time and review score
---   6.2 Top 10 sellers by revenue
---   6.3 Same-state vs cross-state shipping
+-- 06_delivery_freight_sellers.sql
+--   6.1 DELIVERY TIME AND REVIEW SCOREAND CORRELATION (ITEMS WITHOUT A DELIVERY DATE ARE EXCLUDED)
+--   6.2 TOP 10 SELLERS BY REVENUE (AND THEIR AVARAGE REVIEW SCORE)
+--   6.3 SAME STATE/CROSS STATE DIFFERENCES IN SHIPPING DELIVERY TIME AND FREIGHT COST
+
 -- ==========================================================================================================================================
--- 6.1 DELIVERY TIME AND REVIEW SCORE
--- Items are grouped by delivery time; we compare the average review score.
--- Items without a delivery date are excluded.
+-- 6.1 DELIVERY TIME AND REVIEW SCOREAND CORRELATION (ITEMS WITHOUT A DELIVERY DATE ARE EXCLUDED)
 
 SELECT *
 FROM `olist-pricing-analysis.olist.big_table`;
@@ -28,9 +23,9 @@ FROM `olist-pricing-analysis.olist.big_table`
 WHERE delivery_days IS NOT NULL
 GROUP BY delivery_days_group
 ORDER BY delivery_days_group;
+
 --==========================================================================================================================================
--- 6.2 TOP 10 SELLERS BY REVENUE
--- Shows revenue and average review score of the ten biggest sellers.
+-- 6.2 TOP 10 SELLERS BY REVENUE (AND THEIR AVARAGE REVIEW SCORE)
 
 SELECT *
 FROM `olist-pricing-analysis.olist.big_table`;
@@ -42,8 +37,7 @@ ORDER BY revenue DESC
 LIMIT 10;
 
 -- ==========================================================================================================================================
--- 6.3 SAME-STATE VS CROSS-STATE SHIPPING
--- Compares delivery time and freight when seller and customer share a state.
+-- 6.3 SAME STATE/CROSS STATE DIFFERENCES IN SHIPPING DELIVERY TIME AND FREIGHT COST
 
 SELECT
 CASE WHEN seller_state = customer_state THEN 'same state'
@@ -53,10 +47,3 @@ ROUND(AVG(delivery_days), 2)AS avg_delivery_days,
 ROUND(AVG(freight_value)) AS avg_freight_value
 FROM `olist-pricing-analysis.olist.big_table`
 GROUP BY shipping_type;
-
-
-
-
-
-
-
