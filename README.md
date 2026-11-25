@@ -165,7 +165,27 @@ Eight of the orders were delivered without a delivery date and 0 were delivered 
 And the big_table is created.
 
 3. **Validation (check if big_table was created properly, if any data was lost and no rows are duplicated)**
+<div align="center">
 
+| check_name | value |
+|:---|---:|
+| Missing customer city | 0 |
+| Distinct keys in the big table (order_id + order_item_id) | 110197 |
+| Missing delivery days | 8 |
+| Missing review score | 827 |
+| Category = unknown | 1537 |
+| Missing seller city | 0 |
+| Missing seller state | 0 |
+| Expected rows (delivered) | 110197 |
+| Missing customer state | 0 |
+| How many rows | 110197 |
+
+</div>
+
+Table big_table has 110197 rows like it supposed to and every item key (order_id + order_item_id) is unique. 
+
+4. **Summary (missing values in big_table)**
+Eight items have no delivery_days. The average and median ignore NULL so we leave them as they are. Filling in 0 would artificially lower the average delivery days. 827 items have no review score - no review doesn't mean a score of 0 so nothing is filled in. 1537 items are with a category 'unknown'. They are left here so the total analysis stays complete.
 
 ### Overview
 
