@@ -149,8 +149,14 @@ Eight of the orders were delivered without a delivery date and 0 were delivered 
 
 The raw data is spread across 9 tables. To avoid repeating the same joins in every query, one base view called big_table was created. It contains everything needed for the analysis, with one row per delivered order item.
 
-#### 1. Reviews made to be one row per order** - The data check in 1.3 showed that some of the orders have more than one review. Joining reviews directly to order items would duplicate those items and inflate revenue and item counts. A view reviews_per_order was created with the average score per order. After this every order has at maximum one review - it can be joined safely now.
-#### 2. Creation of one big table containing everything necessary for the analysis (big_table)** - a single table will be used for all the analysis queries. It was built step by step by joining: order_items + orders (purchase dates and delivery dates) + customers (customer_unique_id, customer state and city) + sellers (seller state and city) + reviews_per_order + products + category_translation (review score and product category). For the first join (items and orders) INNER JOIN was used to get only these rows that occur in both of the tables. For the rest (after having items and their orders) we join the rest with LEFT JOIN, so that we have everything that is in the base table and only those rows that are shared in this and the other tables.
+#### 1. Reviews made to be one row per order**
+
+The data check in 1.3 showed that some of the orders have more than one review. Joining reviews directly to order items would duplicate those items and inflate revenue and item counts. A view reviews_per_order was created with the average score per order. After this every order has at maximum one review - it can be joined safely now.
+
+#### 2. Creation of one big table containing everything necessary for the analysis (big_table)**
+
+A single table will be used for all the analysis queries. It was built step by step by joining: order_items + orders (purchase dates and delivery dates) + customers (customer_unique_id, customer state and city) + sellers (seller state and city) + reviews_per_order + products + category_translation (review score and product category). For the first join (items and orders) INNER JOIN was used to get only these rows that occur in both of the tables. For the rest (after having items and their orders) we join the rest with LEFT JOIN, so that we have everything that is in the base table and only those rows that are shared in this and the other tables.
+
 <div align="center">
    <img width="640" height="360" alt="image" src="https://github.com/user-attachments/assets/9e76caf7-5a96-4ab5-8c59-8d3ab92c3322" />
 </div>
@@ -267,6 +273,169 @@ Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of
 The category with highest revenue is health_beauty 1233131.72 BRL and 9465 items. Watches & gifts has the second highest revenue with much less items sold. That is because their average price is very high. In every top 10 category the average price is higher than the median price.
 
 ### Categories & prices
+#### 1. Prices in categories (25th percentile, median, 75th percentile)
+
+The 25th and 75th percentiles are added (the middle 50% of prices lies between them) which show the typical price range of a category.
+Only categories with at least 100 items sold are included, for the medians to be reliable.
+
+<div align="center">
+
+| category | items_sold | price_p25 | median_price | price_p75 |
+|:---|---:|---:|---:|---:|
+| computers | 199 | 650.0 | 1100.0 | 1340.0 |
+| agro_industry_and_commerce | 206 | 35.0 | 229.0 | 420.0 |
+| home_appliances_2 | 231 | 154.0 | 227.99 | 559.0 |
+| furniture_bedroom | 103 | 95.0 | 179.0 | 219.0 |
+| office_furniture | 1668 | 114.99 | 144.94 | 186.99 |
+| air_conditioning | 289 | 75.9 | 139.99 | 199.0 |
+| cool_stuff | 3718 | 69.9 | 129.9 | 199.0 |
+| watches_gifts | 5859 | 59.0 | 128.9 | 209.9 |
+| construction_tools_safety | 183 | 65.0 | 115.0 | 285.0 |
+| kitchen_dining_laundry_garden_furniture | 274 | 54.9 | 109.0 | 209.9 |
+| furniture_living_room | 495 | 69.99 | 103.97 | 139.9 |
+| industry_commerce_and_business | 265 | 78.0 | 102.0 | 118.0 |
+| construction_tools_lights | 301 | 45.0 | 100.0 | 228.0 |
+| luggage_accessories | 1077 | 59.99 | 99.99 | 148.5 |
+| art | 197 | 55.0 | 99.9 | 99.99 |
+| small_appliances | 658 | 49.1 | 98.0 | 299.0 |
+| home_construction | 596 | 49.95 | 95.2 | 150.0 |
+| musical_instruments | 651 | 55.0 | 94.9 | 299.9 |
+| home_confort | 429 | 86.9 | 89.9 | 179.0 |
+| pet_shop | 1924 | 45.9 | 89.7 | 119.99 |
+| audio | 362 | 19.9 | 89.0 | 175.0 |
+| construction_tools_construction | 916 | 40.9 | 86.6 | 155.6 |
+| perfumery | 3340 | 49.99 | 84.99 | 149.9 |
+| auto | 4140 | 39.49 | 84.9 | 155.0 |
+| computers_accessories | 7644 | 39.9 | 81.99 | 149.0 |
+| health_beauty | 9465 | 39.99 | 79.9 | 129.9 |
+| toys | 4030 | 45.99 | 79.9 | 129.9 |
+| bed_bath_table | 10953 | 47.99 | 79.57 | 115.0 |
+| stationery | 2466 | 44.0 | 79.0 | 114.9 |
+| baby | 2982 | 48.9 | 77.98 | 134.9 |
+| sports_leisure | 8431 | 43.99 | 76.9 | 129.9 |
+| signaling_and_security | 197 | 29.0 | 75.0 | 134.0 |
+| fashion_shoes | 257 | 35.9 | 74.9 | 99.9 |
+| unknown | 1537 | 34.98 | 69.99 | 122.99 |
+| furniture_decor | 8160 | 39.9 | 65.49 | 99.9 |
+| market_place | 305 | 30.0 | 62.8 | 109.9 |
+| costruction_tools_tools | 103 | 29.9 | 59.99 | 190.0 |
+| fashion_underwear_beach | 127 | 49.9 | 59.9 | 79.9 |
+| garden_tools | 4268 | 49.9 | 59.9 | 99.9 |
+| fashion_male_clothing | 125 | 43.0 | 59.9 | 127.9 |
+| housewares | 6795 | 32.0 | 59.7 | 114.9 |
+| books_technical | 263 | 30.0 | 57.49 | 88.5 |
+| consoles_games | 1089 | 24.5 | 54.89 | 129.0 |
+| costruction_tools_garden | 232 | 29.45 | 49.9 | 122.9 |
+| fashion_bags_accessories | 1985 | 34.3 | 49.0 | 74.99 |
+| food | 499 | 27.9 | 49.0 | 80.49 |
+| fixed_telephony | 255 | 29.9 | 49.0 | 139.99 |
+| home_appliances | 754 | 27.2 | 47.59 | 115.0 |
+| drinks | 361 | 29.49 | 47.49 | 58.0 |
+| christmas_supplies | 150 | 13.77 | 45.8 | 79.9 |
+| books_general_interest | 537 | 30.0 | 45.0 | 115.0 |
+| food_drink | 269 | 22.81 | 39.0 | 54.0 |
+| telephony | 4430 | 21.99 | 29.99 | 49.0 |
+| electronics | 2729 | 14.89 | 21.89 | 52.5 |
+
+</div>
+
+#### 2. Price dispersion within categories
+
+Two categories can have a similar median price but a very different spread of prices. The ratio of the 75th to the 25th percentile shows how wide the range of typical prices is. A ratio close to 1 means similar prices, and a high ratio means the category mixes cheap and expensive items.
+
+<div align="center">
+
+| category | items_sold | price_p25 | median_price | price_p75 | p75_p25_ratio |
+|:---|---:|---:|---:|---:|---:|
+| agro_industry_and_commerce | 206 | 35.0 | 229.0 | 420.0 | 12.0 |
+| audio | 362 | 19.9 | 89.0 | 175.0 | 8.79 |
+| costruction_tools_tools | 103 | 29.9 | 59.99 | 190.0 | 6.35 |
+| small_appliances | 658 | 49.1 | 98.0 | 299.0 | 6.09 |
+| christmas_supplies | 150 | 13.77 | 45.8 | 79.9 | 5.8 |
+| musical_instruments | 651 | 55.0 | 94.9 | 299.9 | 5.45 |
+| consoles_games | 1089 | 24.5 | 54.89 | 129.0 | 5.27 |
+| construction_tools_lights | 301 | 45.0 | 100.0 | 228.0 | 5.07 |
+| fixed_telephony | 255 | 29.9 | 49.0 | 139.99 | 4.68 |
+| signaling_and_security | 197 | 29.0 | 75.0 | 134.0 | 4.62 |
+| construction_tools_safety | 183 | 65.0 | 115.0 | 285.0 | 4.38 |
+| home_appliances | 754 | 27.2 | 47.59 | 115.0 | 4.23 |
+| costruction_tools_garden | 232 | 29.45 | 49.9 | 122.9 | 4.17 |
+| auto | 4140 | 39.49 | 84.9 | 155.0 | 3.93 |
+| books_general_interest | 537 | 30.0 | 45.0 | 115.0 | 3.83 |
+| kitchen_dining_laundry_garden_furniture | 274 | 54.9 | 109.0 | 209.9 | 3.82 |
+| construction_tools_construction | 916 | 40.9 | 86.6 | 155.6 | 3.8 |
+| computers_accessories | 7644 | 39.9 | 81.99 | 149.0 | 3.73 |
+| market_place | 305 | 30.0 | 62.8 | 109.9 | 3.66 |
+| home_appliances_2 | 231 | 154.0 | 227.99 | 559.0 | 3.63 |
+| housewares | 6795 | 32.0 | 59.7 | 114.9 | 3.59 |
+| watches_gifts | 5859 | 59.0 | 128.9 | 209.9 | 3.56 |
+| electronics | 2729 | 14.89 | 21.89 | 52.5 | 3.53 |
+| unknown | 1537 | 34.98 | 69.99 | 122.99 | 3.52 |
+| health_beauty | 9465 | 39.99 | 79.9 | 129.9 | 3.25 |
+| perfumery | 3340 | 49.99 | 84.99 | 149.9 | 3.0 |
+| home_construction | 596 | 49.95 | 95.2 | 150.0 | 3.0 |
+| fashion_male_clothing | 125 | 43.0 | 59.9 | 127.9 | 2.97 |
+| sports_leisure | 8431 | 43.99 | 76.9 | 129.9 | 2.95 |
+| books_technical | 263 | 30.0 | 57.49 | 88.5 | 2.95 |
+| food | 499 | 27.9 | 49.0 | 80.49 | 2.88 |
+| cool_stuff | 3718 | 69.9 | 129.9 | 199.0 | 2.85 |
+| toys | 4030 | 45.99 | 79.9 | 129.9 | 2.82 |
+| fashion_shoes | 257 | 35.9 | 74.9 | 99.9 | 2.78 |
+| baby | 2982 | 48.9 | 77.98 | 134.9 | 2.76 |
+| air_conditioning | 289 | 75.9 | 139.99 | 199.0 | 2.62 |
+| pet_shop | 1924 | 45.9 | 89.7 | 119.99 | 2.61 |
+| stationery | 2466 | 44.0 | 79.0 | 114.9 | 2.61 |
+| furniture_decor | 8160 | 39.9 | 65.49 | 99.9 | 2.5 |
+| luggage_accessories | 1077 | 59.99 | 99.99 | 148.5 | 2.48 |
+| bed_bath_table | 10953 | 47.99 | 79.57 | 115.0 | 2.4 |
+| food_drink | 269 | 22.81 | 39.0 | 54.0 | 2.37 |
+| furniture_bedroom | 103 | 95.0 | 179.0 | 219.0 | 2.31 |
+| telephony | 4430 | 21.99 | 29.99 | 49.0 | 2.23 |
+| fashion_bags_accessories | 1985 | 34.3 | 49.0 | 74.99 | 2.19 |
+| home_confort | 429 | 86.9 | 89.9 | 179.0 | 2.06 |
+| computers | 199 | 650.0 | 1100.0 | 1340.0 | 2.06 |
+| garden_tools | 4268 | 49.9 | 59.9 | 99.9 | 2.0 |
+| furniture_living_room | 495 | 69.99 | 103.97 | 139.9 | 2.0 |
+| drinks | 361 | 29.49 | 47.49 | 58.0 | 1.97 |
+| art | 197 | 55.0 | 99.9 | 99.99 | 1.82 |
+| office_furniture | 1668 | 114.99 | 144.94 | 186.99 | 1.63 |
+| fashion_underwear_beach | 127 | 49.9 | 59.9 | 79.9 | 1.6 |
+| industry_commerce_and_business | 265 | 78.0 | 102.0 | 118.0 | 1.51 |
+
+</div>
+
+The widest price dispertion is in agro_industry_and_commerce and it's 12. That means that the 75th percentile is 12 times bigger than the 25th percentile (420 to 35). This category is followed by audio, costruction_tools_tools, small_appliances. The smallest dispertion is in industry_commerce_and_business - 1.51 and fashion_underwear_beach 1.6. A high ratio can also mean that a category contains different types of products
+
+#### 3. Items with the highest price compared with the median price of the same product
+
+<div align="center">
+
+| seller_id | product_id | category | price | median_product_price | price_index |
+|:---|:---|:---|---:|---:|---:|
+| 620c87c171fb2a6dd6e8bb4dec959fc6 | 6ae7f4ef0ca670ca2609d039af87d057 | perfumery | 99.0 | 23.9 | 4.14 |
+| 7299e27ed73d2ad986de7f7c77d919fa | f03859e4cc21018569f5ae7a03897ff4 | consoles_games | 159.99 | 49.99 | 3.2 |
+| ef506c96320abeedfb894c34db06f478 | a0fe1efb855f3e786f0650268cd77f44 | agro_industry_and_commerce | 59.99 | 21.99 | 2.73 |
+| ef506c96320abeedfb894c34db06f478 | a0fe1efb855f3e786f0650268cd77f44 | agro_industry_and_commerce | 59.99 | 21.99 | 2.73 |
+| ef506c96320abeedfb894c34db06f478 | a0fe1efb855f3e786f0650268cd77f44 | agro_industry_and_commerce | 59.99 | 21.99 | 2.73 |
+| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 95.0 | 35.0 | 2.71 |
+| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 95.0 | 35.0 | 2.71 |
+| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 95.0 | 35.0 | 2.71 |
+| f27e33c6d29b5138fa9967bcd445b6d5 | 7ac0d3f8ac5b60c13d74b02b8cbb4623 | pet_shop | 239.9 | 94.9 | 2.53 |
+| 6edacfd9f9074789dad6d62ba7950b9c | 081476f0ad46b45e23bbd0f3d1d4dd98 | housewares | 49.9 | 19.9 | 2.51 |
+| 0afccdb8a34ee5c79f7c06faf2b4d56e | 80103e141ed0da3b1d63cb0c7d1f7d48 | telephony | 99.9 | 39.9 | 2.5 |
+| 0afccdb8a34ee5c79f7c06faf2b4d56e | 9ac3471b9357338ea8054108a00389e3 | telephony | 99.9 | 39.9 | 2.5 |
+| 16090f2ca825584b5a147ab24aa30c86 | 4520766ec412348b8d4caa5e8a18c464 | auto | 99.99 | 40.0 | 2.5 |
+| ef506c96320abeedfb894c34db06f478 | 500870614ddcf5bd84f7d26861026c8a | telephony | 34.99 | 14.0 | 2.5 |
+| ef506c96320abeedfb894c34db06f478 | 500870614ddcf5bd84f7d26861026c8a | telephony | 34.99 | 14.0 | 2.5 |
+| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
+| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
+| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
+| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
+| beadbee30901a7f61d031b6b686095ad | 2fea0f2cec6b6324a277d4a61c2ed2c6 | health_beauty | 86.0 | 35.0 | 2.46 |
+
+</div>
+
+The highest above the median (market price) is an item sold in perfumery - sold for 99 BRL while the median is 23.9 BRL The lowest below the median is a product sold in audio with only 0.1 price index (which indicates that the product is sold way below the market price).
 
 ### Regional markets
 
