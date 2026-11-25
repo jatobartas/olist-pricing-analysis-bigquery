@@ -1,5 +1,5 @@
 -- ===========================================================================================================================================
--- 04_price_position.sql
+-- 04_categories_prices.sql
 --   4.1 PRICES IN CATEGORIES (25TH, MEDIAN AND 75TH PERCENTILE)
 --   4.2 PRICE DISPERSION WITHIN CATEGORIES (RATIO 75TH/25TH PERCENTILE - THE HIGHER RATIO THE WIDER RANGE OF PRICES - HIGHER DISPERSION)
 --   4.3 TOP 20 ITEMS WITH THE HIGHEST PRICE TO MEDIAN INDEX (MEDIAN AS A MARKET LEVEL)
