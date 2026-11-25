@@ -438,6 +438,124 @@ The widest price dispertion is in agro_industry_and_commerce and it's 12. That m
 The highest above the median (market price) is an item sold in perfumery - sold for 99 BRL while the median is 23.9 BRL The lowest below the median is a product sold in audio with only 0.1 price index (which indicates that the product is sold way below the market price).
 
 ### Regional markets
+#### 1. Metrics by customer state
+
+To compare the regional markets of Brazil. For each customer state, the query shows revenue, average item price, average freight, average delivery time and average review score. This shows where sales are concentrated and where customers pay more for shipping, wait longer and rate their orders lower.
+
+<div align="center">
+
+| customer_state | revenue | average_price | average_freight | average_delivery_days | average_review_score |
+|:---|---:|---:|---:|---:|---:|
+| SP | 5067633.16 | 109.1 | 15.12 | 8.26 | 4.18 |
+| RJ | 1759651.13 | 124.42 | 20.91 | 14.69 | 3.87 |
+| MG | 1552481.83 | 120.2 | 20.63 | 11.51 | 4.12 |
+| RS | 728897.47 | 118.83 | 21.61 | 14.71 | 4.09 |
+| PR | 666063.51 | 117.91 | 20.47 | 11.48 | 4.15 |
+| SC | 507012.13 | 123.75 | 21.51 | 14.52 | 4.05 |
+| BA | 493584.14 | 134.02 | 26.49 | 18.77 | 3.86 |
+| DF | 296498.41 | 125.9 | 21.07 | 12.5 | 4.06 |
+| GO | 282836.7 | 124.21 | 22.56 | 14.95 | 4.04 |
+| ES | 268643.45 | 120.74 | 22.03 | 15.19 | 4.01 |
+| PE | 251889.49 | 144.27 | 32.69 | 17.79 | 4.02 |
+| CE | 219757.38 | 154.11 | 32.73 | 20.54 | 3.87 |
+| PA | 174470.59 | 165.53 | 35.63 | 23.3 | 3.84 |
+| MT | 152191.62 | 146.76 | 28.0 | 17.51 | 4.01 |
+| MA | 117009.38 | 146.26 | 38.49 | 21.2 | 3.76 |
+| MS | 115429.97 | 142.33 | 23.35 | 15.11 | 4.06 |
+| PB | 112586.82 | 192.13 | 43.09 | 20.12 | 4.04 |
+| PI | 84721.0 | 161.99 | 39.12 | 18.93 | 3.96 |
+| RN | 82105.66 | 157.59 | 35.72 | 18.87 | 4.11 |
+| AL | 78855.72 | 184.67 | 35.87 | 23.99 | 3.83 |
+| SE | 56574.19 | 150.86 | 36.57 | 20.98 | 3.9 |
+| TO | 48402.51 | 156.14 | 37.44 | 17.0 | 4.16 |
+| RO | 45682.76 | 167.34 | 41.33 | 19.28 | 4.07 |
+| AM | 22155.84 | 135.93 | 33.31 | 25.96 | 4.11 |
+| AC | 15930.97 | 175.07 | 40.05 | 20.33 | 4.13 |
+| AP | 13374.81 | 165.12 | 34.16 | 27.75 | 4.26 |
+| RR | 7057.47 | 153.42 | 43.09 | 27.83 | 3.89 |
+
+</div>
+
+SP has by far the highest revenue 5067633 BRL, followed by RJ (1759651 BRL) and MG (1552481 BRL). The lowest revenue is in RR with only 7057 BRL. SP has also the lowest average delivery time (8 days), the lowest average freight - 15 BRL and the lowest average price. Lowest reviews are in MA, PA, and BA. The highest is in AP.
+
+#### 2. Metrics by customer city
+A state can include both a large city and small towns, so the same metrics are calculated for the 20 cities with the highest revenue.
+
+<div align="center">
+
+| customer_city | customer_state | revenue | average_price | average_freight | average_delivery_days | average_review_score |
+|:---|:---|---:|---:|---:|---:|---:|
+| sao paulo | SP | 1859556.83 | 106.87 | 14.28 | 7.56 | 4.17 |
+| rio de janeiro | RJ | 955573.97 | 125.87 | 20.57 | 14.2 | 3.91 |
+| belo horizonte | MG | 346039.04 | 112.1 | 19.41 | 10.64 | 4.09 |
+| brasilia | DF | 295814.72 | 126.36 | 21.1 | 12.51 | 4.06 |
+| curitiba | PR | 205999.33 | 119.28 | 18.8 | 9.93 | 4.13 |
+| campinas | SP | 184657.87 | 113.57 | 14.97 | 9.23 | 4.09 |
+| porto alegre | RS | 182319.55 | 115.91 | 20.65 | 15.44 | 3.97 |
+| salvador | BA | 173273.05 | 127.59 | 25.36 | 18.68 | 3.74 |
+| guarulhos | SP | 139008.19 | 107.43 | 14.47 | 7.6 | 4.13 |
+| niteroi | RJ | 115890.26 | 120.97 | 20.42 | 13.76 | 3.92 |
+| sao bernardo do campo | SP | 102514.23 | 98.48 | 13.71 | 7.74 | 4.31 |
+| santos | SP | 98349.4 | 120.82 | 15.75 | 8.62 | 4.1 |
+| goiania | GO | 96547.85 | 123.15 | 21.37 | 14.72 | 4.08 |
+| fortaleza | CE | 93269.67 | 134.39 | 28.36 | 19.99 | 3.84 |
+| santo andre | SP | 89380.83 | 102.5 | 14.21 | 7.42 | 4.27 |
+| recife | PE | 85186.33 | 129.86 | 29.89 | 17.74 | 3.93 |
+| florianopolis | SC | 84043.85 | 129.5 | 21.28 | 14.42 | 3.97 |
+| osasco | SP | 80820.34 | 97.26 | 13.99 | 7.04 | 4.26 |
+| jundiai | SP | 80398.04 | 125.23 | 15.45 | 8.36 | 4.17 |
+| belem | PA | 78002.75 | 164.56 | 31.47 | 21.28 | 3.87 |
+
+</div>
+
+The highest revenue city is Sao Paulo with 1859556 BRL revenue. It's followed by Rio de Janeiro and Belo horizonte.
+Among the top 10 cities, the three from SP (sao paulo, campinas, guarulhos) have the shortest delivery times (7.56, 9.23 and 7.60 days) and the lowest average freight (14.28, 14.97 and 14.47 BRL).
+
+#### 3. Most popular category in each top 10 state.
+
+Ordered by items sold.
+
+<div align="center">
+
+| customer_state | category | items_sold |
+|:---|:---|---:|
+| SP | bed_bath_table | 5157 |
+| RJ | bed_bath_table | 1605 |
+| MG | bed_bath_table | 1322 |
+| RS | bed_bath_table | 611 |
+| PR | furniture_decor | 516 |
+| SC | sports_leisure | 356 |
+| BA | health_beauty | 340 |
+| DF | health_beauty | 242 |
+| PE | health_beauty | 233 |
+| GO | bed_bath_table | 231 |
+
+</div>
+
+Bed_bath_table is the most popular category in 5 of the 10 states shown (SP, RJ, MG, RS, GO). Health_beauty is the most popular category in 3 states (BA, DF, PE).
+
+#### 4. Most popular category in each top 10 cities.
+
+Ordered by items sold.
+
+<div align="center">
+
+| customer_city | category | items_sold |
+|:---|:---|---:|
+| sao paulo | bed_bath_table | 1950 |
+| rio de janeiro | bed_bath_table | 829 |
+| belo horizonte | bed_bath_table | 348 |
+| brasilia | health_beauty | 242 |
+| porto alegre | bed_bath_table | 174 |
+| campinas | bed_bath_table | 165 |
+| curitiba | furniture_decor | 151 |
+| salvador | health_beauty | 135 |
+| guarulhos | bed_bath_table | 133 |
+| niteroi | bed_bath_table | 104 |
+
+</div>
+
+Bed_bath_table is the most popular category in 7 of the 10 cities shown (sao paulo, rio de janeiro, belo horizonte, porto alegre, campinas, guarulhos, niteroi). Health_beauty leads in brasilia (242 items) and salvador (135 items), and furniture_decor leads in curitiba (151 items).
 
 ### Delivery & satisfaction
 
