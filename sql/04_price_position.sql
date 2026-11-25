@@ -1,21 +1,11 @@
 -- ===========================================================================================================================================
 -- 04_price_position.sql
--- Project : Price Position and Market Analysis of an E-commerce Marketplace
--- Data    : Olist Brazilian E-Commerce dataset (Kaggle), loaded to BigQuery
---           as `olist-pricing-analysis.olist`
--- Purpose : Measure the price position of products and sellers against the market, using the base view big_table (delivered order items only). The market is defined as the median price in the same category and the median price of the same product across sellers (the data contains no competitor prices).
---
--- Contents
---   4.1 Category price levels
---   4.2 Seller price position (same product, different sellers)
---   4.3 Price position vs sales and customer satisfaction
--- =====================================================================
+--   4.1 PRICES IN CATEGORIES (25TH, MEDIAN AND 75TH PERCENTILE)
+--   4.2 PRICE DISPERSION WITHIN CATEGORIES (RATIO 75TH/25TH PERCENTILE - THE HIGHER RATIO THE WIDER RANGE OF PRICES - HIGHER DISPERSION)
+--   4.3 TOP 20 ITEMS WITH THE HIGHEST PRICE TO MEDIAN INDEX (MEDIAN AS A MARKET LEVEL)
 
--- 4.1 Prices in categories
--- Typical price level per category: 25th percentile, median and 75th percentile of item price (the middle 50% of prices lies between the
--- 25th and 75th percentile).
--- Categories with fewer than 100 items are excluded from this ranking
--- because a ratio based on a few items is not reliable.
+-- ==========================================================================================================================================
+-- 4.1 PRICES IN CATEGORIES (25TH, MEDIAN AND 75TH PERCENTILE)
 
 SELECT category,
        COUNT(*) AS items_sold,
@@ -27,11 +17,7 @@ GROUP BY category
 ORDER BY median_price DESC;
 
 -- ==========================================================================================================================================
--- 4.2 PRICE DISPERSION WITHIN CATEGORIES
--- Ratio of the 75th to the 25th percentile of item price per category:
--- the higher the ratio, the wider the range of typical prices.
--- Categories with fewer than 100 items are excluded from this ranking
--- because a ratio based on a few items is not reliable.
+-- 4.2 PRICE DISPERSION WITHIN CATEGORIES (RATIO 75TH/25TH PERCENTILE - THE HIGHER RATIO THE WIDER RANGE OF PRICES - HIGHER DISPERSION)
 
 WITH category_prices AS (
 SELECT category,
@@ -47,10 +33,7 @@ FROM category_prices
 ORDER BY p75_p25_ratio DESC;
 
 -- ==========================================================================================================================================
--- 4.3 SELLER PRICE POSITION
--- Price index = item price / median price of the same product (1.0 = market level).
--- All sellers and products are included.
--- Shows the 20 items with the highest price index.
+-- 4.3 TOP 20 ITEMS WITH THE HIGHEST PRICE TO MEDIAN INDEX (MEDIAN AS A MARKET LEVEL)
 
 SELECT *
 FROM `olist-pricing-analysis.olist.big_table`;
