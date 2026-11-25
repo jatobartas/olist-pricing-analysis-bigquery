@@ -67,7 +67,7 @@ We are starting with almost a 100k orders, 33k products, over 3k sellers. The th
 
 </div>
 
-Key are unique in: orders, products, sellers, category_translation. For order_items and order_payments it was needed to create a distinct key with forcing together order_id + order_item_id for order_items and order_id + payment_sequential for order_payments. Thanks to that - they can be joined safely. Customers has 99441 rows but only 96096 distinct customer_unique_id values (customer_id may be assigned per order). Customers will be counted with customer_unique_id. Geolocation will not be joined to the other tables. 
+Key are unique in: orders, products, sellers, category_translation. For order_items and order_payments it was needed to create a distinct key with forcing together order_id + order_item_id for order_items and order_id + payment_sequential for order_payments. Thanks to that - they can be joined safely. Customers has 99441 rows but only 96096 distinct customer_unique_id values (customer_id may be assigned per order). Customers will be counted with customer_unique_id. Order_reviews will be changed later to create a possibility of joining them with the rest of the data. Geolocation will not be joined to the other tables. 
 
 4. **Missing data in the most important columns** - missing values decide which rows can be used - we can't calculate the average delivery date for rows without delivery time.
 
@@ -146,6 +146,26 @@ Item prices vary from 0.85 BRL to 6735 BRL. Average price is 120.65, median is 7
 Eight of the orders were delivered without a delivery date and 0 were delivered before purchase - everything works.
 
 ### Cleaning
+1. **Reviews made to be one row per order** - The data check in 1.3 showed that some of the orders have more than one review. Joining reviews directly to order items would duplicate those items and inflate revenue and item counts. A view reviews_per_order was created with the average score per order. After this every order has at maximum one review - it can be joined safely now.
+2. **Creation of one big table containing everything necessary for the analysis (big_table)** - a single table will be used for all the analysis queries. It was built step by step by joining: order_items + orders (purchase dates and delivery dates) + customers (customer_unique_id, customer state and city) + sellers (seller state and city) + reviews_per_order + products + category_translation (review score and product category). For the first join (items and orders) INNER JOIN was used to get only these rows that occur in both of the tables. For the rest (after having items and their orders) we join the rest with LEFT JOIN, so that we have everything that is in the base table and only those rows that are shared in this and the other tables.
+<div align="center">
+   <img width="640" height="360" alt="image" src="https://github.com/user-attachments/assets/9e76caf7-5a96-4ab5-8c59-8d3ab92c3322" />
+</div>
+
+<div align="center">
+
+| order_id | order_item_id | product_id | seller_id | price | freight_value | customer_id | purchase_date | purchase_month | delivery_days | freight_share_of_price | customer_unique_id | customer_state | customer_city | seller_state | seller_city | review_score | portuguese_category | category |
+|:---|---:|:---|:---|---:|---:|:---|:---|:---|---:|---:|:---|:---|:---|:---|:---|---:|:---|:---|
+| 3ee6513ae7ea23bdfab5b9ab60bffcb5 | 1 | 8a3254bee785a526d548a81a9bc3c9be | 96804ea39d96eb908e7c3afdb671bb9e | 0.85 | 18.23 | 161b6d415e8b3413c6609c70cf405b5a | 2018-04-24 | 2018-04-01 | 13 | 21.447 | d80730c15c647bc8f2ad77c908ba5ca9 | SP | hortolandia | MG | ibia | 4.0 | construcao_ferramentas_construcao | construction_tools_construction |
+| 6e864b3f0ec71031117ad4cf46b7f2a1 | 1 | 8a3254bee785a526d548a81a9bc3c9be | 96804ea39d96eb908e7c3afdb671bb9e | 0.85 | 18.23 | 9f9d249355f63c5c1216a82b802452c1 | 2018-04-24 | 2018-04-01 | 9 | 21.447 | b38211bd797f4fdd81a98b9d1754b606 | RJ | duque de caxias | MG | ibia | 5.0 | construcao_ferramentas_construcao | construction_tools_construction |
+| c5bdd8ef3c0ec420232e668302179113 | 2 | 8a3254bee785a526d548a81a9bc3c9be | 96804ea39d96eb908e7c3afdb671bb9e | 0.85 | 22.3 | 5af78bf1a82a2660d1e3fd78c645f58f | 2018-04-27 | 2018-04-01 | 8 | 26.235 | f006d7920bd71c252f61ec355eb50dcb | SP | cotia | MG | ibia | 1.0 | construcao_ferramentas_construcao | construction_tools_construction |
+
+</div>
+
+And the big_table is created.
+
+3. **Validation (check if big_table was created properly, if any data was lost and no rows are duplicated)**
+
 
 ### Overview
 
