@@ -1,5 +1,5 @@
 -- ===========================================================================================================================================
--- 02_clean_table.sql
+-- 02_cleaning.sql
 --   2.1 REVIEWS MADE TO BE ONE ROW PER ORDER
 --   2.2 CREATION OF A ONE BIG TABLE CONTAINING EVERYTHING THAT IS NECESSARY FOR THE ANALYSIS (big_table)
 --   2.3 VALIDATION (CHECK IF big_table WAS CREATED PROPERLY, IF ANY DATA WAS LOST AND NO ROWS ARE DUPLICATED)
