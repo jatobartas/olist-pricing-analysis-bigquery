@@ -570,6 +570,26 @@
 - A high ratio can also mean that a category contains different types of products
 - When it comes to top sellers - the first one made almost 227k of revenue and had an average review score of 4.14. Three out of top 10 sellers had their review score below 4.
 
+<p align="center">
+  <img src="dashboard/screenshots/03_regional_markets.png" alt="Regional markets" width="700">
+</p>
+
+- SP state had the highest revenue of 5.1 mln BRL, followed by RJ - 1.8 mln and MG 1.6 mln BRL. SP has also the lowest average delivery time (8 days), the lowest average freight - 15 BRL and the lowest average price.
+- The lowest revenue state was RR with only 7057 BRL.
+- The highest revenue city is Sao Paulo with 1.9 mln BRL revenue. It's followed by Rio de Janeiro (1 mln BRL) and Belo horizonte (346k).
+- It is easy to see that the states in the North have much higher delivery time than the ones beside Sao Paolo. It looks like there could be a correlation - with the increase in the distance from Sao Paolo the average delivery days rise.
+- Bed_bath_table is the most popular category in 5 of the top 10 states (in SP on the top as well)
+- Bed_bath_table is the most popular category in 7 of the top 10 cities.
+
+<p align="center">
+  <img src="dashboard/screenshots/04_delivery_satisfaction.png" alt="Delivery & Satisfaction" width="700">
+</p>
+
+- Items delivered up to 7 days have an average review score of 4.33/5. The score falls with each group. The last one over 21 days has an average score of 2.97/5. There may be a correlation between the review score and delivery time (the review score may decrease with the inscrease in delivery time).
+- When it comes to deliveries within the same state and the cross-shipped - the second ones have much bigger average delivery time - almost 15 days and the ones within the same state have only 7.46.
+- The freight for both of these types of delivery cost accordingly 24 BRL - for cross-shipped and 13 BRL for the one shipped within the same state.
+- The average delivery takes about 12 days and gets a review on average of 4,08 days.
+
 ## Data source & Full Dashboard
 [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 
