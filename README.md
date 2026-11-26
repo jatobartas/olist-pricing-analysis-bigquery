@@ -1,7 +1,7 @@
 # Analysis of an E-commerce Marketplace Olist with BigQuery & Looker Studio
 
 ## Introduction
-This project analyses data of Brazilian E-Commerce website Olist using BigQuery and Looker Studio. The main goal of the analysis is to draw some insights from the Data and to create specific business recomendations depending on the outcome. The focus is put on understanding the market sells, prices (across categories), sales (across regions), delivery time, freight cost and customer satisfaction.
+- This project analyses data of Brazilian E-Commerce website Olist using BigQuery and Looker Studio. The main goal of the analysis is to draw some insights from the Data and to create specific business recomendations depending on the outcome. The focus is put on understanding the market sells, prices (across categories), sales (across regions), delivery time, freight cost and customer satisfaction.
 
 ## Table of contents
 
@@ -21,7 +21,9 @@ This project analyses data of Brazilian E-Commerce website Olist using BigQuery 
 
 ### 1. Data Check
 
-This part of project is dedicated for the check of the quality of 9 tables that are included in the Dataset (from Kaggle). The process is conducted in BigQuery and is carried out to ensure the quality of the analysis. The full code is available in [`sql/01_data_check.sql`](sql/01_data_check.sql).
+- This part of project is dedicated for the check of the quality of 9 tables that are included in the Dataset (from Kaggle).
+- The process is conducted in BigQuery and is carried out to ensure the quality of the analysis.
+- The full code is available in [`sql/01_data_check.sql`](sql/01_data_check.sql).
 
 #### 1. Row counts - to get to know the data and see with how big dataset will I be working with. All CSV tables were loaded correctly. 
 
@@ -41,8 +43,9 @@ This part of project is dedicated for the check of the quality of 9 tables that 
 
 </div>
 
-Order_items may have a bit more rows than order_items - it may be because one order may contain multiple items. 
-We are starting with almost a 100k orders, 33k products, over 3k sellers. The thing that may gather attention is that orders and customers are the same number. It will have to be checked later.
+- Order_items may have a bit more rows than order_items - it may be because one order may contain multiple items.
+- We are starting with almost a 100k orders, 33k products, over 3k sellers.
+- The thing that should get attention is that orders and customers are the same number. It will have to be checked later.
 
 #### 2. Tables preview - to see the column names and example data across different tables. The example query outcome is showed below.
 
@@ -81,7 +84,11 @@ We are starting with almost a 100k orders, 33k products, over 3k sellers. The th
 
 </div>
 
-Key are unique in: orders, products, sellers, category_translation. For order_items and order_payments it was needed to create a distinct key with forcing together order_id + order_item_id for order_items and order_id + payment_sequential for order_payments. Thanks to that - they can be joined safely. Customers has 99441 rows but only 96096 distinct customer_unique_id values (customer_id may be assigned per order). Customers will be counted with customer_unique_id. Order_reviews will be changed later to create a possibility of joining them with the rest of the data. Geolocation will not be joined to the other tables. 
+- Key are unique in: orders, products, sellers, category_translation.
+- For order_items and order_payments it was needed to create a distinct key with forcing together order_id + order_item_id for order_items and order_id + payment_sequential for order_payments. Thanks to that - they can be joined safely.
+- Customers has 99441 rows but only 96096 distinct customer_unique_id values (customer_id may be assigned per order). Customers will be counted with customer_unique_id.
+- Order_reviews will be changed later to create a possibility of joining them with the rest of the data.
+- Geolocation will not be joined to the other tables. 
 
 #### 4. Missing data in the most important columns - missing values decide which rows can be used - we can't calculate the average delivery date for rows without delivery time.
 
@@ -103,8 +110,10 @@ Key are unique in: orders, products, sellers, category_translation. For order_it
 
 </div>
 
-Columns containing NULLs - order_approved_at (orders), order_delivered_customer_date (orders), product_category_name (products), product_weight_g (products).
-The column with time of approval won't be used. For the calculation of metrics with delivery date, metrics will use only the delivered ones, 610 products have no category so they will be marked as "uknown" so we don't loose the data. 2 products have no weight but it won't be needed for the analysis.
+- Columns containing NULLs - order_approved_at (orders), order_delivered_customer_date (orders), product_category_name (products), product_weight_g (products).
+- The column with time of approval won't be used.
+- For the calculation of metrics with delivery date, metrics will use only the delivered ones, 610 products have no category so they will be marked as "uknown" so we don't loose the data.
+- 2 products have no weight but it won't be needed for the analysis.
 
 #### 5. Check of order statuses and their share in the data + date range - to check how many orders we're delivered (and their other statuses). Also to check what is the timestamp.
    
@@ -123,7 +132,7 @@ The column with time of approval won't be used. For the calculation of metrics w
 
 </div>
 
-Delivered orders have 97% of the whole deliveries, shipped have 1% (they were probably canceled during the shipping) and canceled have only 0,63% of the orders.
+- Delivered orders have 97% of the whole deliveries, shipped have 1% (they were probably canceled during the shipping) and canceled have only 0,63% of the orders.
 
 <div align="center">
 
@@ -133,7 +142,8 @@ Delivered orders have 97% of the whole deliveries, shipped have 1% (they were pr
 
 </div>
 
-The first order was issued on 4th of September 2016, and the last one on 17th of October 2018. The timestamp is more than 2 years.
+- The first order was issued on 4th of September 2016, and the last one on 17th of October 2018.
+- The timestamp is more than 2 years.
 
 #### 6. Price and freight check (min/max, average, median, zero values) - to see the range of prices and freight costs and to spot extreme or zero values before calculating averages and medians.
 
@@ -145,7 +155,10 @@ The first order was issued on 4th of September 2016, and the last one on 17th of
 
 </div>
 
-Item prices vary from 0.85 BRL to 6735 BRL. Average price is 120.65, median is 74.99 (Median is smaller than the average so it implies right-skeweness of the distribution - most of the products have smaller prices but some of them have much higher and that's why mean chases the tail and ends up higher than the median). The freight varies from 0 to 409.68 BRL and it's average is 20 BRL. Amount of orders with zero freight - 383.
+- Item prices vary from 0.85 BRL to 6735 BRL.
+- Average price is 120.65, median is 74.99 (Median is smaller than the average so it implies right-skeweness of the distribution - most of the products have smaller prices but some of them have much higher and that's why mean chases the tail and ends up higher than the median).
+- The freight varies from 0 to 409.68 BRL and it's average is 20 BRL.
+- Amount of orders with zero freight - 383.
 
 #### 7. Check if the dates are consistent and if there are any errors (orders without a date or delivered before they were purchased)
 
@@ -157,19 +170,23 @@ Item prices vary from 0.85 BRL to 6735 BRL. Average price is 120.65, median is 7
 
 </div>
 
-Eight of the orders were delivered without a delivery date and 0 were delivered before purchase - everything works.
+- Eight of the orders were delivered without a delivery date and 0 were delivered before purchase - everything works.
 
 ### 2. Cleaning
 
-The raw data is spread across 9 tables. To avoid repeating the same joins in every query, one base view called big_table was created. It contains everything needed for the analysis, with one row per delivered order item.
+- The raw data is spread across 9 tables. To avoid repeating the same joins in every query, one base view called big_table was created. It contains everything needed for the analysis, with one row per delivered order item.
 
 #### 1. Reviews made to be one row per order**
 
-The data check in 1.3 showed that some of the orders have more than one review. Joining reviews directly to order items would duplicate those items and inflate revenue and item counts. A view reviews_per_order was created with the average score per order. After this every order has at maximum one review - it can be joined safely now.
+- The data check in 1.3 showed that some of the orders have more than one review.
+- Joining reviews directly to order items would duplicate those items and inflate revenue and item counts. A view reviews_per_order was created with the average score per order. After this every order has at maximum one review - it can be joined safely now.
 
 #### 2. Creation of one big table containing everything necessary for the analysis (big_table)**
 
-A single table will be used for all the analysis queries. It was built step by step by joining: order_items + orders (purchase dates and delivery dates) + customers (customer_unique_id, customer state and city) + sellers (seller state and city) + reviews_per_order + products + category_translation (review score and product category). For the first join (items and orders) INNER JOIN was used to get only these rows that occur in both of the tables. For the rest (after having items and their orders) we join the rest with LEFT JOIN, so that we have everything that is in the base table and only those rows that are shared in this and the other tables.
+- A single table will be used for all the analysis queries.
+- It is built step by step by joining: order_items + orders (purchase dates and delivery dates) + customers (customer_unique_id, customer state and city) + sellers (seller state and city) + reviews_per_order + products + category_translation (review score and product category).
+- For the first join (items and orders) INNER JOIN was used to get only these rows that occur in both of the tables.
+- For the rest (after having items and their orders) we join the rest with LEFT JOIN, so that we have everything that is in the base table and only those rows that are shared in this and the other tables.
 
 <div align="center">
    <img width="640" height="360" alt="image" src="https://github.com/user-attachments/assets/9e76caf7-5a96-4ab5-8c59-8d3ab92c3322" />
@@ -185,7 +202,7 @@ A single table will be used for all the analysis queries. It was built step by s
 
 </div>
 
-And the big_table is created.
+- And the big_table is created.
 
 #### 3. Validation (check if big_table was created properly, if any data was lost and no rows are duplicated)
 <div align="center">
@@ -205,19 +222,22 @@ And the big_table is created.
 
 </div>
 
-Table big_table has 110197 rows like it supposed to and every item key (order_id + order_item_id) is unique. 
+- Table big_table has 110197 rows like it supposed to and every item key (order_id + order_item_id) is unique. 
 
 #### 4. Summary (missing values in big_table)
 
-Eight items have no delivery_days. The average and median ignore NULL so we leave them as they are. Filling in 0 would artificially lower the average delivery days. 827 items have no review score - no review doesn't mean a score of 0 so nothing is filled in. 1537 items are with a category 'unknown'. They are left here so the total analysis stays complete.
+- Eight items have no delivery_days.
+- The average and median ignore NULL so we leave them as they are. Filling in 0 would artificially lower the average delivery days. 827 items have no review score - no review doesn't mean a score of 0 so nothing is filled in.
+- 1537 items are with a category 'unknown'. They are left here so the total analysis stays complete.
 
 ### 3. Overview
 
-This stage describes the scale of the marketplace and sets reference values for all later analyses. All KPIs are calculated from big_table, so they cover delivered order items only.
+- This stage describes the scale of the marketplace and sets reference values for all later analyses.
+- All KPIs are calculated from big_table, so they cover delivered order items only.
 
 #### 1. Overall KPIs - to find out basic business numbers as items sold, revenue, orders, sellers, customers, freight etc.
 
-Revenue is caluclated as sum of price, average order value is revenue divided by the number of distinct orders (one order can have multiple items so it has to be the amount of orders), customers are counted with customer_unique_id, median and 99th percentile are added because some of the items may pull the mean up. 
+- Revenue is caluclated as sum of price, average order value is revenue divided by the number of distinct orders (one order can have multiple items so it has to be the amount of orders), customers are counted with customer_unique_id, median and 99th percentile are added because some of the items may pull the mean up. 
 
 <div align="center">
 
@@ -227,11 +247,14 @@ Revenue is caluclated as sum of price, average order value is revenue divided by
 
 </div>
 
-The delivered orders contain 110197 items delivered in 96478 orders, sold by 2970 sellers across 32216 products - sold to 93358 customers. Revenue is 13.22 milion BRL and the freight is 2.19 mln BRL. The average order value is 137.04 BRL, an average order price is 119.98. Orders are delivered on average in 12 days and the average review score is 4.08/5.
+- The delivered orders contain 110197 items delivered in 96478 orders, sold by 2970 sellers across 32216 products - sold to 93358 customers.
+- Revenue is 13.22 milion BRL and the freight is 2.19 mln BRL.
+- The average order value is 137.04 BRL, an average order price is 119.98.
+- Orders are delivered on average in 12 days and the average review score is 4.08/5.
 
 #### 2. Monthly trend - to see how sales changed over time, find peak and lowest months, and check whether the peaks were caused by bigger sales or bigger basket (more items).
 
-The first 3 months are to sparse for analysis so they won't be taken into account.
+- The first 3 months are to sparse for analysis so they won't be taken into account.
 
 <div align="center">
 
@@ -263,7 +286,8 @@ The first 3 months are to sparse for analysis so they won't be taken into accoun
 
 </div>
 
-Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of 8475 (987765.37 BRL revenue) in November 2017. The average order value was oscillating around the mean (137,04 BRL) and the revenue grew bigger. This means that sales grew because customers placed more orders, not because their baskets were more expensive.
+- Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of 8475 (987765.37 BRL revenue) in November 2017.
+- The average order value was oscillating around the mean (137,04 BRL) and the revenue grew bigger. This means that sales grew because customers placed more orders, not because their baskets were more expensive.
 
 #### 3. Top 10 categories - to find which product categories bring the most revenue, how many items they sold, their average price and median.
 
@@ -284,13 +308,15 @@ Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of
 
 </div>
 
-The category with highest revenue is health_beauty 1233131.72 BRL and 9465 items. Watches & gifts has the second highest revenue with much less items sold. That is because their average price is very high. In every top 10 category the average price is higher than the median price.
+- The category with highest revenue is health_beauty 1233131.72 BRL and 9465 items.
+- Watches & gifts has the second highest revenue with much less items sold. That is because their average price is very high.
+- In every top 10 category the average price is higher than the median price.
 
 ### 4. Categories & prices
 #### 1. Prices in categories (25th percentile, median, 75th percentile)
 
-The 25th and 75th percentiles are added (the middle 50% of prices lies between them) which show the typical price range of a category.
-Only categories with at least 100 items sold are included, for the medians to be reliable.
+- The 25th and 75th percentiles are added (the middle 50% of prices lies between them) which show the typical price range of a category.
+- Only categories with at least 100 items sold are included, for the medians to be reliable.
 
 <div align="center">
 
@@ -311,7 +337,9 @@ Only categories with at least 100 items sold are included, for the medians to be
 
 #### 2. Price dispersion within categories
 
-Two categories can have a similar median price but a very different spread of prices. The ratio of the 75th to the 25th percentile shows how wide the range of typical prices is. A ratio close to 1 means similar prices, and a high ratio means the category mixes cheap and expensive items.
+- Two categories can have a similar median price but a very different spread of prices.
+- The ratio of the 75th to the 25th percentile shows how wide the range of typical prices is.
+- A ratio close to 1 means similar prices, and a high ratio means the category mixes cheap and expensive items.
 
 <div align="center">
 
@@ -330,7 +358,8 @@ Two categories can have a similar median price but a very different spread of pr
 
 </div>
 
-The widest price dispertion is in agro_industry_and_commerce and it's 12. That means that the 75th percentile is 12 times bigger than the 25th percentile (420 to 35). This category is followed by audio, costruction_tools_tools, small_appliances. The smallest dispertion is in industry_commerce_and_business - 1.51 and fashion_underwear_beach 1.6. A high ratio can also mean that a category contains different types of products
+- The widest price dispertion is in agro_industry_and_commerce and it's 12. That means that the 75th percentile is 12 times bigger than the 25th percentile (420 to 35). This category is followed by audio, costruction_tools_tools, small_appliances.
+- The smallest dispertion is in industry_commerce_and_business - 1.51 and fashion_underwear_beach 1.6. A high ratio can also mean that a category contains different types of products
 
 #### 3. Items with the highest price compared with the median price of the same product
 
@@ -351,12 +380,14 @@ The widest price dispertion is in agro_industry_and_commerce and it's 12. That m
 
 </div>
 
-The highest above the median (market price) is an item sold in perfumery - sold for 99 BRL while the median is 23.9 BRL The lowest below the median is a product sold in audio with only 0.1 price index (which indicates that the product is sold way below the market price).
+- The highest above the median (market price) is an item sold in perfumery - sold for 99 BRL while the median is 23.9 BRL
+- The lowest below the median is a product sold in audio with only 0.1 price index (which indicates that the product is sold way below the market price).
 
 ### 5. Regional markets
 #### 1. Metrics by customer state
 
-To compare the regional markets of Brazil. For each customer state, the query shows revenue, average item price, average freight, average delivery time and average review score. This shows where sales are concentrated and where customers pay more for shipping, wait longer and rate their orders lower.
+- To compare the regional markets of Brazil.
+- For each customer state, the query shows revenue, average item price, average freight, average delivery time and average review score. This shows where sales are concentrated and where customers pay more for shipping, wait longer and rate their orders lower.
 
 <div align="center">
 
@@ -375,10 +406,13 @@ To compare the regional markets of Brazil. For each customer state, the query sh
 
 </div>
 
-SP has by far the highest revenue 5067633 BRL, followed by RJ (1759651 BRL) and MG (1552481 BRL). The lowest revenue is in RR with only 7057 BRL. SP has also the lowest average delivery time (8 days), the lowest average freight - 15 BRL and the lowest average price. Lowest reviews are in MA, PA, and BA. The highest is in AP.
+- SP has by far the highest revenue 5067633 BRL, followed by RJ (1759651 BRL) and MG (1552481 BRL).
+- The lowest revenue is in RR with only 7057 BRL.
+- SP has also the lowest average delivery time (8 days), the lowest average freight - 15 BRL and the lowest average price.
+- Lowest reviews are in MA, PA, and BA. The highest is in AP.
 
 #### 2. Metrics by customer city
-A state can include both a large city and small towns, so the same metrics are calculated for the 20 cities with the highest revenue.
+- A state can include both a large city and small towns, so the same metrics are calculated for the 20 cities with the highest revenue.
 
 <div align="center">
 
@@ -397,12 +431,12 @@ A state can include both a large city and small towns, so the same metrics are c
 
 </div>
 
-The highest revenue city is Sao Paulo with 1859556 BRL revenue. It's followed by Rio de Janeiro and Belo horizonte.
-Among the top 10 cities, the three from SP (sao paulo, campinas, guarulhos) have the shortest delivery times (7.56, 9.23 and 7.60 days) and the lowest average freight (14.28, 14.97 and 14.47 BRL).
+- The highest revenue city is Sao Paulo with 1859556 BRL revenue. It's followed by Rio de Janeiro and Belo horizonte.
+- Among the top 10 cities, the three from SP (sao paulo, campinas, guarulhos) have the shortest delivery times (7.56, 9.23 and 7.60 days) and the lowest average freight (14.28, 14.97 and 14.47 BRL).
 
 #### 3. Most popular category in each top 10 state.
 
-Ordered by items sold.
+- Ordered by items sold.
 
 <div align="center">
 
@@ -421,11 +455,12 @@ Ordered by items sold.
 
 </div>
 
-Bed_bath_table is the most popular category in 5 of the 10 states shown (SP, RJ, MG, RS, GO). Health_beauty is the most popular category in 3 states (BA, DF, PE).
+- Bed_bath_table is the most popular category in 5 of the 10 states shown (SP, RJ, MG, RS, GO).
+- Health_beauty is the most popular category in 3 states (BA, DF, PE).
 
 #### 4. Most popular category in each top 10 cities.
 
-Ordered by items sold.
+- Ordered by items sold.
 
 <div align="center">
 
@@ -444,10 +479,12 @@ Ordered by items sold.
 
 </div>
 
-Bed_bath_table is the most popular category in 7 of the 10 cities shown (sao paulo, rio de janeiro, belo horizonte, porto alegre, campinas, guarulhos, niteroi). Health_beauty leads in brasilia (242 items) and salvador (135 items), and furniture_decor leads in curitiba (151 items).
+- Bed_bath_table is the most popular category in 7 of the 10 cities shown (sao paulo, rio de janeiro, belo horizonte, porto alegre, campinas, guarulhos, niteroi).
+- Health_beauty leads in brasilia (242 items) and salvador (135 items), and furniture_decor leads in curitiba (151 items).
 
 ### 6. Delivery & satisfaction
-To check whether customers give lower ratings when they wait longer for delivery. Items are put into four delivery time groups with CASE WHEN, and the average review score is compared between the groups.
+- To check whether customers give lower ratings when they wait longer for delivery.
+- Items are put into four delivery time groups with CASE WHEN, and the average review score is compared between the groups.
 
 #### 1. Delivery time and review score
 <div align="center">
@@ -461,9 +498,11 @@ To check whether customers give lower ratings when they wait longer for delivery
 
 </div>
 
-Items delivered up to 7 days have an average review score of 4.33/5. The score falls with each group. The last one over 21 days has an average score of 2.97/5. There may be a correlation between the review score and delivery time (the review score may decrease with the inscrease in delivery time).
+- Items delivered up to 7 days have an average review score of 4.33/5. The score falls with each group.
+- The last one over 21 days has an average score of 2.97/5.
+- There may be a correlation between the review score and delivery time (the review score may decrease with the inscrease in delivery time).
 #### 2. Top 10 sellers by revenue
-To see how revenue is spread across the biggest sellers and whether the sellers with the highest sales also have good review scores.
+- To see how revenue is spread across the biggest sellers and whether the sellers with the highest sales also have good review scores.
 
 <div align="center">
 
@@ -482,10 +521,12 @@ To see how revenue is spread across the biggest sellers and whether the sellers 
 
 </div>
 
-Top seller made 226987 BRL in revenue and has the review of avg 4.14/5. The 5th best seller made 186570 BRL in revenue but has a much lower score than average which is 3.35/5.
+- Top seller made 226987 BRL in revenue and has the review of avg 4.14/5.
+- The 5th best seller made 186570 BRL in revenue but has a much lower score than average which is 3.35/5.
 
 #### 3. Same-state vs cross-state shipping
-To check whether shipping within the same state is faster and cheaper than shipping between states. Each item is labelled "same state" when the seller and the customer are in the same state, and "different state" otherwise.
+- To check whether shipping within the same state is faster and cheaper than shipping between states.
+- Each item is labelled "same state" when the seller and the customer are in the same state, and "different state" otherwise.
 
 <div align="center">
 
@@ -496,7 +537,8 @@ To check whether shipping within the same state is faster and cheaper than shipp
 
 </div>
 
-Items delivered across different states have higher average delivery time (14.58) than ones that are delivered in the same state (7.46). Average freight is more expensive in cross-state deliveries (24 BRL) than in the same state (13 BRL). 
+- Items delivered across different states have higher average delivery time (14.58) than ones that are delivered in the same state (7.46).
+- Average freight is more expensive in cross-state deliveries (24 BRL) than in the same state (13 BRL). 
 
 
 ## Looker Studio Dashboard
