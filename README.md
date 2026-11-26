@@ -12,8 +12,8 @@
   - [4. Categories & prices](#4-categories--prices)
   - [5. Regional markets](#5-regional-markets)
   - [6. Delivery & satisfaction](#6-delivery--satisfaction)
-- [Looker Studio Dashboard](#looker-studio-dashboard)
-- [Data source](#data-source)
+- [Conclusions](#conclusions)
+- [Data source & Full Dashboard](#data-source--full-dashboard)
 - [Tools](#tools)
 - [Author](#author)
   
@@ -541,11 +541,14 @@
 - Average freight is more expensive in cross-state deliveries (24 BRL) than in the same state (13 BRL). 
 
 
-## Looker Studio Dashboard
-Full Looker Studio Dashboard is available at the [Dashboard](dashboard)
+## Conclusions
 
-## Data source
+
+
+## Data source & Full Dashboard
 [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+
+Full Looker Studio Dashboard is available at the [Dashboard](dashboard)
 
 ## Tools
 - BigQuery
