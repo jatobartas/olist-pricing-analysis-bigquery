@@ -13,6 +13,7 @@
   - [5. Regional markets](#5-regional-markets)
   - [6. Delivery & satisfaction](#6-delivery--satisfaction)
 - [Conclusions](#conclusions)
+- [Recommendations](#recommendations)
 - [Data source & Full Dashboard](#data-source--full-dashboard)
 - [Tools](#tools)
 - [Author](#author)
@@ -112,7 +113,7 @@
 
 - Columns containing NULLs - order_approved_at (orders), order_delivered_customer_date (orders), product_category_name (products), product_weight_g (products).
 - The column with time of approval won't be used.
-- For the calculation of metrics with delivery date, metrics will use only the delivered ones, 610 products have no category so they will be marked as "uknown" so we don't loose the data.
+- For the calculation of metrics with delivery date, metrics will use only the delivered ones, 610 products have no category so they will be marked as "unknown" so we don't loose the data.
 - 2 products have no weight but it won't be needed for the analysis.
 
 #### 5. Check of order statuses and their share in the data + date range - to check how many orders we're delivered (and their other statuses). Also to check what is the timestamp.
@@ -132,7 +133,7 @@
 
 </div>
 
-- Delivered orders have 97% of the whole deliveries, shipped have 1% (they were probably canceled during the shipping) and canceled have only 0,63% of the orders.
+- Delivered orders have 97% of the whole deliveries, shipped have 1% (probably still in transit) and canceled have only 0,63% of the orders.
 
 <div align="center">
 
@@ -237,7 +238,7 @@
 
 #### 1. Overall KPIs - to find out basic business numbers as items sold, revenue, orders, sellers, customers, freight etc.
 
-- Revenue is caluclated as sum of price, average order value is revenue divided by the number of distinct orders (one order can have multiple items so it has to be the amount of orders), customers are counted with customer_unique_id, median and 99th percentile are added because some of the items may pull the mean up. 
+- Revenue is calculated as sum of price, average order value is revenue divided by the number of distinct orders (one order can have multiple items so it has to be the amount of orders), customers are counted with customer_unique_id, median and 99th percentile are added because some of the items may pull the mean up. 
 
 <div align="center">
 
@@ -249,7 +250,7 @@
 
 - The delivered orders contain 110197 items delivered in 96478 orders, sold by 2970 sellers across 32216 products - sold to 93358 customers.
 - Revenue is 13.22 milion BRL and the freight is 2.19 mln BRL.
-- The average order value is 137.04 BRL, an average order price is 119.98.
+- The average order value is 137.04 BRL, an average product price is 119.98.
 - Orders are delivered on average in 12 days and the average review score is 4.08/5.
 
 #### 2. Monthly trend - to see how sales changed over time, find peak and lowest months, and check whether the peaks were caused by bigger sales or bigger basket (more items).
@@ -286,7 +287,7 @@
 
 </div>
 
-- Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of 8475 (987765.37 BRL revenue) in November 2017.
+- Sales grew from 913 items (111,798.36 BRL revenue) in January 2017 to it's peak of 8475 (987765.37 BRL revenue) in November 2017.
 - The average order value was oscillating around the mean (137,04 BRL) and the revenue grew bigger. This means that sales grew because customers placed more orders, not because their baskets were more expensive.
 
 #### 3. Top 10 categories - to find which product categories bring the most revenue, how many items they sold, their average price and median.
@@ -358,8 +359,8 @@
 
 </div>
 
-- The widest price dispertion is in agro_industry_and_commerce and it's 12. That means that the 75th percentile is 12 times bigger than the 25th percentile (420 to 35). This category is followed by audio, costruction_tools_tools, small_appliances.
-- The smallest dispertion is in industry_commerce_and_business - 1.51 and fashion_underwear_beach 1.6. A high ratio can also mean that a category contains different types of products
+- The widest price dispersion is in agro_industry_and_commerce and it's 12. That means that the 75th percentile is 12 times bigger than the 25th percentile (420 to 35). This category is followed by audio, costruction_tools_tools, small_appliances.
+- The smallest dispersion is in industry_commerce_and_business - 1.51 and fashion_underwear_beach 1.6. A high ratio can also mean that a category contains different types of products
 
 #### 3. Items with the highest price compared with the median price of the same product
 
@@ -549,7 +550,7 @@
 
  - Olist - Brazilian Marketplace platform through years 2016 - 2018 created over 13.2 mln BRL of revenue. The first sold order was on 2016-09-04 and the last one counted in the analysis was on 2018-10-17. That is over 2 years of timpespan. Through that years Olist sold and delivered 110,197 items in 96478 orders, sold by 2970 sellers across 32216 products - sold to 93358 customers. 
 - The analysis contained dates from 2017 - the first 3 months were too sparse for the analysis (in the first 3 months Olist sold only 3, 313 and 1 item).
-- Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of 8475 (987765.37 BRL revenue) in November 2017 which could potentially have been driven by Black Friday.
+- Sales grew from 913 items (111,798.36 BRL revenue) in January 2017 to it's peak of 8475 (987765.37 BRL revenue) in November 2017 which could potentially have been driven by Black Friday.
 - The average order value was oscillating around the mean (137,04 BRL) and the revenue grew bigger. This means that sales grew because customers placed more orders, not because their baskets were more expensive.
 
 <p align="center">
@@ -565,8 +566,8 @@
 
 - The 25th and 75th percentiles were added (the middle 50% of prices lies between them) which show the typical price range of a category. And only categories with at least 100 items sold are included, for the medians to be reliable.
 - The ratio of the 75th to the 25th percentile shows how wide the range of typical prices is. A higher number indicates more vary range of prices in a category.
-- The widest dispertion is in the category agro_industry_and_commerce and it's 12. That means that the 75th percentile is 12 times bigger than the 25th percentile (420 to 35). This category is followed by audio, costruction_tools_tools, small_appliances.
-- The smallest dispertion is in industry_commerce_and_business - 1.51 and fashion_underwear_beach 1.6.
+- The widest dispersion is in the category agro_industry_and_commerce and it's 12. That means that the 75th percentile is 12 times bigger than the 25th percentile (420 to 35). This category is followed by audio, costruction_tools_tools, small_appliances.
+- The smallest dispersion is in industry_commerce_and_business - 1.51 and fashion_underwear_beach 1.6.
 - A high ratio can also mean that a category contains different types of products
 - When it comes to top sellers - the first one made almost 227k of revenue and had an average review score of 4.14. Three out of top 10 sellers had their review score below 4.
 
@@ -588,7 +589,14 @@
 - Items delivered up to 7 days have an average review score of 4.33/5. The score falls with each group. The last one over 21 days has an average score of 2.97/5. There may be a correlation between the review score and delivery time (the review score may decrease with the inscrease in delivery time).
 - When it comes to deliveries within the same state and the cross-shipped - the second ones have much bigger average delivery time - almost 15 days and the ones within the same state have only 7.46.
 - The freight for both of these types of delivery cost accordingly 24 BRL - for cross-shipped and 13 BRL for the one shipped within the same state.
-- The average delivery takes about 12 days and gets a review on average of 4,08 days.
+- The average delivery takes about 12 days and gets a review on average of 4,08/5.
+
+## Recommendations
+1. **Try to keep the delivery time as low as it's doable (possibly below 21 days)** - items in the group of delivered in more than 21 days got an average review of 2.97/5 and the ones delivered up to 7 days - 4.33/5. Olist should track the potential delay of the orders and act early by contacting the seller and the customer (so the review stays high).
+2.  **Grow seller base outside of Sao Paolo state (Up in the North states).** Same state shipping is much cheaper for the customer - 13 BRL and could potentially bring faster deliveries (avg 7.46 days) and better reviews. Cross shipping is much more expensive - 24 BRL and takes longer time - 14.58 days on average. Recruiting new sellers in the North would bring value not only to the business but also to the customers and sellers.
+3.  **Monitor top sellers reviews** - three of the top 10 sellers (in revenue) got a review below 4 (even 3.35). That could potentially be the reason for longe average deliveries. Better reviewed sellers should be more supported.
+4.  **Pioritize most popular categories** - health_beauty brings the highest revenue (1.2 mln BRL) and bed_bath_table is the most popular category in 7 of the top 10 cities.
+5. **Monitor items sold way above or below the market price (median of the market)** - One product sold in perfumery is sold for 99 BRL while the median is 23.9 BRL) that could indicate that product is sold for 4 times as the market price is (potentially).
 
 ## Data source & Full Dashboard
 [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
