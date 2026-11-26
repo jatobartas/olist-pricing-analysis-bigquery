@@ -594,7 +594,7 @@
 ## Recommendations
 1. **Try to keep the delivery time as low as it's doable (possibly below 21 days)** - items in the group of delivered in more than 21 days got an average review of 2.97/5 and the ones delivered up to 7 days - 4.33/5. Olist should track the potential delay of the orders and act early by contacting the seller and the customer (so the review stays high).
 2.  **Grow seller base outside of Sao Paolo state (Up in the North states).** Same state shipping is much cheaper for the customer - 13 BRL and could potentially bring faster deliveries (avg 7.46 days) and better reviews. Cross shipping is much more expensive - 24 BRL and takes longer time - 14.58 days on average. Recruiting new sellers in the North would bring value not only to the business but also to the customers and sellers.
-3.  **Monitor top sellers reviews** - three of the top 10 sellers (in revenue) got a review below 4 (even 3.35). That could potentially be the reason for longe average deliveries. Better reviewed sellers should be more supported.
+3.  **Monitor top sellers reviews** - three of the top 10 sellers (in revenue) got a review below 4 (even 3.35). That could potentially be the reason for long average deliveries. Better reviewed sellers should be more supported.
 4.  **Pioritize most popular categories** - health_beauty brings the highest revenue (1.2 mln BRL) and bed_bath_table is the most popular category in 7 of the top 10 cities.
 5. **Monitor items sold way above or below the market price (median of the market)** - One product sold in perfumery is sold for 99 BRL while the median is 23.9 BRL) that could indicate that product is sold for 4 times as the market price is (potentially).
 
