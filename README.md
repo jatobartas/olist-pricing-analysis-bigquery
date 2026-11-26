@@ -543,7 +543,32 @@
 
 ## Conclusions
 
+<p align="center">
+  <img src="dashboard/screenshots/01_overview.png" alt="Dashboard overview" width="700">
+</p>
 
+ - Olist - Brazilian Marketplace platform through years 2016 - 2018 created over 13.2 mln BRL of revenue. The first sold order was on 2016-09-04 and the last one counted in the analysis was on 2018-10-17. That is over 2 years of timpespan. Through that years Olist sold and delivered 110,197 items in 96478 orders, sold by 2970 sellers across 32216 products - sold to 93358 customers. 
+- The analysis contained dates from 2017 - the first 3 months were too sparse for the analysis (in the first 3 months Olist sold only 3, 313 and 1 item).
+- Sales grew from 913 items (40325.11 BRL revenue) in January 2017 to it's peak of 8475 (987765.37 BRL revenue) in November 2017 which could potentially have been driven by Black Friday.
+- The average order value was oscillating around the mean (137,04 BRL) and the revenue grew bigger. This means that sales grew because customers placed more orders, not because their baskets were more expensive.
+
+<p align="center">
+  <img src="dashboard/screenshots/02_categories_prices.png" alt="Categories & Prices" width="700">
+</p>
+
+- Category with the highest revenue was health_beauty with over 1.22 mln BRL and 9465 items sold, followed by watches_gifts with almost 1.22 mln BRL in revenue and 5859 items sold. Watches and gifts category has  much smaller number of items sold than other top 7 categories and a second best score in revenue. This phenomenom could occur due to very high average price of 199.04 BRL and high median of 128.9 BRL.
+- In every top 10 category the average price is higher than the median price. Which indicates a right-skewed distribution (mean follows few expensive items and most of the items are around the median).
+
+<p align="center">
+  <img src="dashboard/screenshots/05_pricing_sellers.png" alt="Pricing & Sellers" width="700">
+</p>
+
+- The 25th and 75th percentiles were added (the middle 50% of prices lies between them) which show the typical price range of a category. And only categories with at least 100 items sold are included, for the medians to be reliable.
+- The ratio of the 75th to the 25th percentile shows how wide the range of typical prices is. A higher number indicates more vary range of prices in a category.
+- The widest dispertion is in the category agro_industry_and_commerce and it's 12. That means that the 75th percentile is 12 times bigger than the 25th percentile (420 to 35). This category is followed by audio, costruction_tools_tools, small_appliances.
+- The smallest dispertion is in industry_commerce_and_business - 1.51 and fashion_underwear_beach 1.6.
+- A high ratio can also mean that a category contains different types of products
+- When it comes to top sellers - the first one made almost 227k of revenue and had an average review score of 4.14. Three out of top 10 sellers had their review score below 4.
 
 ## Data source & Full Dashboard
 [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
